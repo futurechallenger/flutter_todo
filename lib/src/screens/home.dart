@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_todo/src/screens/sample_item_list_view.dart';
+
+import 'add_todo_tile.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,25 +28,7 @@ class HomeScreen extends StatelessWidget {
               flex: 1,
               child: Container(
                   color: Colors.red, child: const SampleItemListView())),
-          Container(
-            color: Colors.black54,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                      height: 80,
-                      child: TextButton(
-                          onPressed: () {
-                            debugPrint("+ Add button is clicked");
-                          },
-                          child: const Text("+ Add",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20)))),
-                ),
-              ],
-            ),
-          )
+          const AddTodoTile()
         ],
       ),
     );
