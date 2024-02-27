@@ -98,6 +98,7 @@ class _AddTodoTileState extends State<AddTodoTile> {
         });
 
         widget.addTodoCallback(SampleItem(SAMPLE_ITEM_ID_COUNTER++));
+        todoTextController.clear();
       }
     });
   }
