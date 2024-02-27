@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/src/screens/home.dart';
+import 'package:flutter_todo/src/screens/sample_item.dart';
 
 class AddTodoTile extends StatefulWidget {
-  const AddTodoTile({
-    super.key,
-  });
+  const AddTodoTile({super.key, required this.addTodoCallback});
+
+  final ValueSetter<SampleItem> addTodoCallback;
 
   @override
   State<AddTodoTile> createState() => _AddTodoTileState();
@@ -93,9 +95,9 @@ class _AddTodoTileState extends State<AddTodoTile> {
         setState(() {
           isAddingNew = false;
           isEditing = false;
-
-          // TODO: Notify the list a new item is added
         });
+
+        widget.addTodoCallback(SampleItem(SAMPLE_ITEM_ID_COUNTER++));
       }
     });
   }

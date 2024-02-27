@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/src/screens/sample_item.dart';
 import 'package:flutter_todo/src/screens/sample_item_list_view.dart';
 
 import 'add_todo_tile.dart';
 
-class HomeScreen extends StatelessWidget {
+int SAMPLE_ITEM_ID_COUNTER = 1;
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   static const routeName = "/home";
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<SampleItem> items = [];
+
+  void addItem(SampleItem item) {
+    setState(() {
+      items.add(item);
+    });
+  }
+
+  void deleteItem(SampleItem item) {
+    setState(() {
+      items.remove(item);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +49,8 @@ class HomeScreen extends StatelessWidget {
           Expanded(
               flex: 1,
               child: Container(
-                  color: Colors.red, child: const SampleItemListView())),
-          const AddTodoTile()
+                  color: Colors.red, child: SampleItemListView(items: items))),
+          AddTodoTile(addTodoCallback: addItem)
         ],
       ),
     );
