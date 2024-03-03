@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/src/screens/home.dart';
 import 'package:flutter_todo/src/screens/sample_item.dart';
 
 class AddTodoTile extends StatefulWidget {
@@ -97,7 +96,7 @@ class _AddTodoTileState extends State<AddTodoTile> {
           isEditing = false;
         });
 
-        widget.addTodoCallback(SampleItem(SAMPLE_ITEM_ID_COUNTER++));
+//        widget.addTodoCallback(SampleItem(SAMPLE_ITEM_ID_COUNTER++));
         todoTextController.clear();
       }
     });
