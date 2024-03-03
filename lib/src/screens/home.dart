@@ -4,8 +4,6 @@ import 'package:flutter_todo/src/screens/sample_item_list_view.dart';
 
 import 'add_todo_tile.dart';
 
-int SAMPLE_ITEM_ID_COUNTER = 1;
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -49,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
               flex: 1,
               child: Container(
-                  color: Colors.red, child: SampleItemListView(items: items))),
+                  color: Colors.red, child: const SampleItemListView())),
           AddTodoTile(addTodoCallback: addItem)
         ],
       ),

@@ -35,9 +35,9 @@ class _SampleItemListViewState extends State<SampleItemListView> {
               // scroll position when a user leaves and returns to the app after it
               // has been killed while running in the background.
               restorationId: 'sampleItemListView',
-              itemCount: items.length,
+              itemCount: snapshot.data?.length,
               itemBuilder: (BuildContext context, int index) {
-                final item = items[index];
+                final item = snapshot.data![index];
 
                 return ListTile(
                     title: Text('SampleItem ${item.id}'),

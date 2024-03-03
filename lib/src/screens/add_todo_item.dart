@@ -10,6 +10,6 @@ class TodoItemView extends StatefulWidget {
 class _TodoItemViewState extends State<TodoItemView> {
   @override
   Widget build(BuildContext context) {
-    return Text("hello, world!");
+    return const Text("hello, world!");
   }
 }
