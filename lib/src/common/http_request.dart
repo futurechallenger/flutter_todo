@@ -16,7 +16,7 @@ class HttpRequest {
         return null;
       }
 
-      final data = body['data'] as List<Map<String, dynamic>>;
+      final data = body['data'] as List<dynamic>;
       final List<TodoItem> todoItemList = [];
       for (var e in data) {
         todoItemList.add(TodoItem.fromJson(e));
