@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/src/screens/sample_item.dart';
+import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:flutter_todo/src/screens/sample_item_list_view.dart';
 
 import 'add_todo_tile.dart';
@@ -14,15 +14,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<SampleItem> items = [];
+  List<TodoItem> items = [];
 
-  void addItem(SampleItem item) {
+  void addItem(TodoItem item) {
     setState(() {
       items.add(item);
     });
   }
 
-  void deleteItem(SampleItem item) {
+  void deleteItem(TodoItem item) {
     setState(() {
       items.remove(item);
     });

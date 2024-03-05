@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/src/screens/sample_item.dart';
+import 'package:flutter_todo/src/models/todo_model.dart';
 
 class AddTodoTile extends StatefulWidget {
   const AddTodoTile({super.key, required this.addTodoCallback});
 
-  final ValueSetter<SampleItem> addTodoCallback;
+  final ValueSetter<TodoItem> addTodoCallback;
 
   @override
   State<AddTodoTile> createState() => _AddTodoTileState();
