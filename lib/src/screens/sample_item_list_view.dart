@@ -40,12 +40,8 @@ class _SampleItemListViewState extends State<SampleItemListView> {
                 final item = snapshot.data![index];
 
                 return ListTile(
-                    title: Text('SampleItem ${item.id}'),
-                    leading: const CircleAvatar(
-                      // Display the Flutter Logo image asset.
-                      foregroundImage:
-                          AssetImage('assets/images/flutter_logo.png'),
-                    ),
+                    title: Text(item.content),
+                    leading: const Icon(Icons.circle_outlined),
                     onTap: () {
                       // Navigate to the details page. If the user leaves and returns to
                       // the app after it has been killed while running in the
