@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/common/http_request.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
-import 'package:flutter_todo/src/screens/sample_item_list_view.dart';
+import 'package:flutter_todo/src/screens/item_list_view.dart';
 
 import 'add_todo_tile.dart';
 
@@ -52,8 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Expanded(
               flex: 1,
-              child: Container(
-                  color: Colors.red, child: const SampleItemListView())),
+              child: Container(color: Colors.red, child: const ItemListView())),
           AddTodoTile(addTodoCallback: addItem)
         ],
       ),
