@@ -28,12 +28,12 @@ class HttpRequest {
     }
   }
 
-  Future<TodoItem> addTodoItem(TodoItem todoItem) async {
+  Future<TodoItem> addTodoItem(String todoTitle) async {
     final response = await http.post(Uri.parse("$hostUrl/add"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
-        body: todoItem.toJson());
+        body: json.encode({'content': todoTitle}));
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;

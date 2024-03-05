@@ -31,9 +31,6 @@ class _SampleItemListViewState extends State<SampleItemListView> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              // Providing a restorationId allows the ListView to restore the
-              // scroll position when a user leaves and returns to the app after it
-              // has been killed while running in the background.
               restorationId: 'sampleItemListView',
               itemCount: snapshot.data?.length,
               itemBuilder: (BuildContext context, int index) {
@@ -43,9 +40,6 @@ class _SampleItemListViewState extends State<SampleItemListView> {
                     title: Text(item.content),
                     leading: const Icon(Icons.circle_outlined),
                     onTap: () {
-                      // Navigate to the details page. If the user leaves and returns to
-                      // the app after it has been killed while running in the
-                      // background, the navigation stack is restored.
                       Navigator.restorablePushNamed(
                         context,
                         SampleItemDetailsView.routeName,
