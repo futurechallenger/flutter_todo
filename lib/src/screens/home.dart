@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/src/common/http_request.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:flutter_todo/src/screens/sample_item_list_view.dart';
 
@@ -16,13 +17,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<TodoItem> items = [];
 
-  void addItem(TodoItem item) {
-    setState(() {
-      items.add(item);
-    });
+  void addItem(String content) async {
+    try {
+      final updatedItem = await HttpRequest().addTodoItem(content);
+      setState(() {
+        items.add(updatedItem);
+      });
+    } catch (e) {
+      debugPrint("Error in adding todo item");
+    }
   }
 
-  void deleteItem(TodoItem item) {
+  void deleteItem(TodoItem item) async {
     setState(() {
       items.remove(item);
     });
