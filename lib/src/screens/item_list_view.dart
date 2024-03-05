@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/common/http_request.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
 
-import 'sample_item_details_view.dart';
+import 'item_details_view.dart';
 
 /// Displays a list of SampleItems.
-class SampleItemListView extends StatefulWidget {
-  const SampleItemListView({super.key});
+class ItemListView extends StatefulWidget {
+  const ItemListView({super.key});
 
   static const routeName = '/';
 
   @override
-  State<SampleItemListView> createState() => _SampleItemListViewState();
+  State<ItemListView> createState() => _ItemListViewState();
 }
 
-class _SampleItemListViewState extends State<SampleItemListView> {
+class _ItemListViewState extends State<ItemListView> {
   late Future<List<TodoItem>?> items;
 
   @override
@@ -42,7 +42,7 @@ class _SampleItemListViewState extends State<SampleItemListView> {
                     onTap: () {
                       Navigator.restorablePushNamed(
                         context,
-                        SampleItemDetailsView.routeName,
+                        ItemDetailsView.routeName,
                       );
                     });
               },
