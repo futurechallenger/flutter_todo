@@ -40,10 +40,10 @@ class _ItemListViewState extends State<ItemListView> {
                     title: Text(item.content),
                     leading: const Icon(Icons.circle_outlined),
                     onTap: () {
-                      Navigator.restorablePushNamed(
-                        context,
-                        ItemDetailsView.routeName,
-                      );
+                      // Navigator.restorablePushNamed(
+                      //     context, ItemDetailsView.routeName,
+                      //     arguments: item.toMap());
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ItemDetailsView(todoItem: item)));
                     });
               },
             );

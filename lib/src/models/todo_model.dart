@@ -34,4 +34,21 @@ class TodoItem {
       'deleted': deleted,
     });
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      "content": content,
+      "id": id,
+      "status": status,
+      "deleted": deleted
+    };
+  }
+
+  factory TodoItem.fromMap(Map<String, dynamic> map) {
+    return TodoItem(
+        id: map['id'],
+        content: map['content'],
+        status: map['status'],
+        deleted: map['deleted']);
+  }
 }
