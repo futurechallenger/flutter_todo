@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
+import 'package:flutter_todo/src/screens/widgets/text_input_switch_view.dart';
 
 class ItemDetailsView extends StatefulWidget {
   const ItemDetailsView({super.key, required this.todoItem});
@@ -20,6 +21,10 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
     _controller = TextEditingController();
   }
 
+  void updateItem(String content) async {
+    debugPrint("update item");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +39,8 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
           Expanded(
             flex: 1,
             child: Center(
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(border: InputBorder.none, labelText: widget.todoItem.content),
+              child: TextInputSwitchView(
+                addTodoCallback: updateItem,
               ),
               // child: Text(todoItem.content),
             ),

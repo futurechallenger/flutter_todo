@@ -1,0 +1,83 @@
+import 'package:flutter/material.dart';
+
+class TextInputSwitchView extends StatefulWidget {
+  const TextInputSwitchView({super.key, required this.addTodoCallback});
+
+  final ValueSetter<String> addTodoCallback;
+
+  @override
+  State<TextInputSwitchView> createState() => _TextInputSwitchViewState();
+}
+
+class _TextInputSwitchViewState extends State<TextInputSwitchView> {
+  bool _isAddingNew = false;
+  bool _isEditing = false;
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _fn = FocusNode();
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isAddingNew) {
+      return Center(
+          child: TextField(
+        focusNode: _fn,
+        controller: _controller,
+        style: const TextStyle(color: Colors.white, fontSize: 20),
+        textInputAction: TextInputAction.go,
+        decoration: const InputDecoration(
+            hintText: "Add a task",
+            hintStyle: TextStyle(color: Colors.white),
+            // border: InputBorder.none
+            border: OutlineInputBorder()),
+      ));
+    } else {
+      return TextButton(
+          onPressed: () {
+            debugPrint("+ Add button is clicked");
+            setState(() {
+              _isAddingNew = true;
+            });
+          },
+          child: const Row(
+            children: [
+              Text("Add a Task",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      backgroundColor: Colors.yellow)),
+              Expanded(flex: 1, child: Spacer())
+            ],
+          ));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller.addListener(() {
+      setState(() {
+        _isEditing = true;
+      });
+    });
+
+    _fn.addListener(() {
+      debugPrint('focus node has focus: ${_fn.hasFocus}');
+      if (!_fn.hasFocus) {
+        setState(() {
+          _isAddingNew = false;
+          _isEditing = false;
+        });
+
+        widget.addTodoCallback(_controller.text);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _fn.dispose();
+    super.dispose();
+  }
+}
