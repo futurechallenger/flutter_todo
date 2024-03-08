@@ -46,6 +46,13 @@ class _AddTodoTileState extends State<AddTodoTile> {
               child: SizedBox(
                   height: 80,
                   child: TextInputSwitchView(
+                    content: "Add a Task",
+                    inputDecoration: const InputDecoration(
+                        hintText: "Add a Task",
+                        hintStyle: TextStyle(color: Colors.white),
+                        border: InputBorder.none),
+                    textStyle:
+                        const TextStyle(color: Colors.white, fontSize: 20),
                     addTodoCallback: widget.addTodoCallback,
                   ))),
           const SizedBox(

@@ -40,6 +40,12 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
             flex: 1,
             child: Center(
               child: TextInputSwitchView(
+                content: widget.todoItem.content,
+                textStyle: const TextStyle(color: Colors.black, fontSize: 20),
+                inputDecoration: InputDecoration(
+                    hintText: widget.todoItem.content,
+                    hintStyle: const TextStyle(color: Colors.black),
+                    border: InputBorder.none),
                 addTodoCallback: updateItem,
               ),
               // child: Text(todoItem.content),

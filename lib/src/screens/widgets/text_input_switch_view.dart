@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TextInputSwitchView extends StatefulWidget {
-  const TextInputSwitchView({super.key, required this.addTodoCallback});
+  const TextInputSwitchView({
+    super.key,
+    this.content = "",
+    required this.inputDecoration,
+    required this.textStyle,
+    required this.addTodoCallback,
+  });
+
+  final String content;
+  final InputDecoration inputDecoration;
+  final TextStyle textStyle;
 
   final ValueSetter<String> addTodoCallback;
 
@@ -24,11 +34,7 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
         controller: _controller,
         style: const TextStyle(color: Colors.white, fontSize: 20),
         textInputAction: TextInputAction.go,
-        decoration: const InputDecoration(
-            hintText: "Add a task",
-            hintStyle: TextStyle(color: Colors.white),
-            // border: InputBorder.none
-            border: OutlineInputBorder()),
+        decoration: widget.inputDecoration,
       ));
     } else {
       return TextButton(
@@ -37,15 +43,12 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
             setState(() {
               _isAddingNew = true;
             });
+            _fn.requestFocus();
           },
-          child: const Row(
+          child: Row(
             children: [
-              Text("Add a Task",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      backgroundColor: Colors.yellow)),
-              Expanded(flex: 1, child: Spacer())
+              Text(widget.content, style: widget.textStyle),
+              const Expanded(flex: 1, child: Spacer())
             ],
           ));
     }
@@ -69,7 +72,9 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
           _isEditing = false;
         });
 
-        widget.addTodoCallback(_controller.text);
+        if (_controller.text.isNotEmpty) {
+          widget.addTodoCallback(_controller.text);
+        }
       }
     });
   }
