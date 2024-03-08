@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/src/common/http_request.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:flutter_todo/src/screens/widgets/text_input_switch_view.dart';
 
@@ -22,7 +23,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
   }
 
   void updateItem(String content) async {
-    debugPrint("update item");
+    await HttpRequest().updateTodo(widget.todoItem.id, content);
   }
 
   @override
