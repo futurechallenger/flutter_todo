@@ -32,7 +32,7 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
           child: TextField(
         focusNode: _fn,
         controller: _controller,
-        style: const TextStyle(color: Colors.white, fontSize: 20),
+        style: widget.textStyle,
         textInputAction: TextInputAction.go,
         decoration: widget.inputDecoration,
       ));
