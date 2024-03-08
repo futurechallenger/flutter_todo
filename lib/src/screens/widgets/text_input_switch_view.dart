@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TextInputSwitchView extends StatefulWidget {
-  TextInputSwitchView({
+  const TextInputSwitchView({
     super.key,
     this.content = "",
     required this.inputDecoration,
@@ -9,8 +9,8 @@ class TextInputSwitchView extends StatefulWidget {
     required this.addTodoCallback,
   });
 
-  String content;
-  InputDecoration inputDecoration;
+  final String content;
+  final InputDecoration inputDecoration;
   final TextStyle textStyle;
 
   final ValueSetter<String> addTodoCallback;
