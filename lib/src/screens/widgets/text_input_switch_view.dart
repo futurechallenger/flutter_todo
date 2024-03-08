@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TextInputSwitchView extends StatefulWidget {
-  const TextInputSwitchView({
+  TextInputSwitchView({
     super.key,
     this.content = "",
     required this.inputDecoration,
@@ -9,8 +9,8 @@ class TextInputSwitchView extends StatefulWidget {
     required this.addTodoCallback,
   });
 
-  final String content;
-  final InputDecoration inputDecoration;
+  String content;
+  InputDecoration inputDecoration;
   final TextStyle textStyle;
 
   final ValueSetter<String> addTodoCallback;
@@ -22,6 +22,7 @@ class TextInputSwitchView extends StatefulWidget {
 class _TextInputSwitchViewState extends State<TextInputSwitchView> {
   bool _isAddingNew = false;
   bool _isEditing = false;
+  String _hintText = "";
   final TextEditingController _controller = TextEditingController();
   final FocusNode _fn = FocusNode();
 
@@ -34,7 +35,11 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
         controller: _controller,
         style: widget.textStyle,
         textInputAction: TextInputAction.go,
-        decoration: widget.inputDecoration,
+        decoration: InputDecoration(
+            // hintText: widget.inputDecoration.hintText,
+            hintText: _hintText,
+            border: InputBorder.none,
+            hintStyle: widget.textStyle),
       ));
     } else {
       return TextButton(
@@ -47,7 +52,7 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
           },
           child: Row(
             children: [
-              Text(widget.content, style: widget.textStyle),
+              Text(_hintText, style: widget.textStyle),
               const Expanded(flex: 1, child: Spacer())
             ],
           ));
@@ -57,6 +62,11 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
   @override
   void initState() {
     super.initState();
+
+    setState(() {
+      _hintText = widget.content;
+    });
+    _controller.text = widget.content;
 
     _controller.addListener(() {
       setState(() {
@@ -75,6 +85,11 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
         if (_controller.text.isNotEmpty) {
           widget.addTodoCallback(_controller.text);
         }
+
+        // widget.content = _controller.text;
+        setState(() {
+          _hintText = _controller.text;
+        });
       }
     });
   }
