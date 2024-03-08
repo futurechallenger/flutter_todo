@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/src/screens/widgets/text_input_switch_view.dart';
 
 class AddTodoTile extends StatefulWidget {
   const AddTodoTile({super.key, required this.addTodoCallback});
@@ -43,31 +44,17 @@ class _AddTodoTileState extends State<AddTodoTile> {
           Expanded(
               flex: 1,
               child: SizedBox(
-                height: 80,
-                child: isAddingNew
-                    ? Center(
-                        child: TextField(
-                          focusNode: fn,
-                          controller: todoTextController,
-                          style: const TextStyle(color: Colors.white),
-                          textInputAction: TextInputAction.go,
-                          decoration: const InputDecoration(
-                              hintText: "Add a task",
-                              hintStyle: TextStyle(color: Colors.white),
-                              border: InputBorder.none),
-                        ),
-                      )
-                    : TextButton(
-                        onPressed: () {
-                          debugPrint("+ Add button is clicked");
-                          setState(() {
-                            isAddingNew = true;
-                          });
-                        },
-                        child: const Text("Add a Task",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 20))),
-              )),
+                  height: 80,
+                  child: TextInputSwitchView(
+                    content: "Add a Task",
+                    inputDecoration: const InputDecoration(
+                        hintText: "Add a Task",
+                        hintStyle: TextStyle(color: Colors.white),
+                        border: InputBorder.none),
+                    textStyle:
+                        const TextStyle(color: Colors.white, fontSize: 20),
+                    addTodoCallback: widget.addTodoCallback,
+                  ))),
           const SizedBox(
             width: 100,
             height: 80,
