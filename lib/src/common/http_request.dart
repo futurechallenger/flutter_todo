@@ -47,5 +47,30 @@ class HttpRequest {
     }
   }
 
-  // Future<TodoItem> updateTodoItem(TodoItem todoItem) async {}
+  Future<TodoItem> updateTodo(int id, String todoTitle,
+      {int? status, int? deleted}) async {
+    final response = await http.post(Uri.parse("$hostUrl/update"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: json.encode({
+          'todo': {
+            'id': id,
+            'content': todoTitle,
+            'status': status,
+            'deleted': deleted
+          }
+        }));
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      if (body['message'] == 'ok') {
+        return TodoItem.fromJson(body['data']);
+      } else {
+        throw Exception("Failed to add todo item");
+      }
+    } else {
+      throw Exception("Failed to add todo item");
+    }
+  }
 }
