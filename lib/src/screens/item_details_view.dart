@@ -31,31 +31,57 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Details"),
-      ),
-      body: Row(
-        children: [
-          const Spacer(
-            flex: 1,
-          ),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: TextInputSwitchView(
-                content: widget.todoItem.content,
-                textStyle: const TextStyle(color: Colors.black, fontSize: 20),
-                inputDecoration: InputDecoration(
-                    hintText: widget.todoItem.content,
-                    hintStyle: const TextStyle(color: Colors.black),
-                    border: InputBorder.none),
-                addTodoCallback: updateItem,
-              ),
-              // child: Text(todoItem.content),
-            ),
-          ),
-          const Spacer(
-            flex: 1,
-          ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                debugPrint("App bar delete clicked");
+                HttpRequest().deleteTodo(widget.todoItem.id);
+              },
+              icon: const Icon(Icons.delete))
         ],
+      ),
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Container(
+          color: Colors.green,
+          child: Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  height: double.infinity,
+                  color: Colors.blue,
+                  child: const Text("Left"),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: TextInputSwitchView(
+                    content: widget.todoItem.content,
+                    textStyle:
+                        const TextStyle(color: Colors.black, fontSize: 20),
+                    inputDecoration: InputDecoration(
+                        hintText: widget.todoItem.content,
+                        hintStyle: const TextStyle(color: Colors.black),
+                        border: InputBorder.none),
+                    addTodoCallback: updateItem,
+                  ),
+                  // child: Text(todoItem.content),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  height: double.infinity,
+                  color: Colors.yellow,
+                  child: const Text("Right"),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
