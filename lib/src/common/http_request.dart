@@ -73,4 +73,19 @@ class HttpRequest {
       throw Exception("Failed to add todo item");
     }
   }
+
+  Future<void> deleteTodo(int id) async {
+    final response = await http.delete(
+      Uri.parse("$hostUrl/delete/$id"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      throw Exception("Failed to delete todo with id: {$id}");
+    }
+  }
 }
