@@ -36,7 +36,6 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
         style: widget.textStyle,
         textInputAction: TextInputAction.go,
         decoration: InputDecoration(
-            // hintText: widget.inputDecoration.hintText,
             hintText: _hintText,
             border: InputBorder.none,
             hintStyle: widget.textStyle),
@@ -86,7 +85,6 @@ class _TextInputSwitchViewState extends State<TextInputSwitchView> {
           widget.addTodoCallback(_controller.text);
         }
 
-        // widget.content = _controller.text;
         setState(() {
           _hintText = _controller.text;
         });
