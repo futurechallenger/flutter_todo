@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/common/http_request.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:flutter_todo/src/screens/widgets/text_input_switch_view.dart';
+import 'package:flutter_todo/src/view_models/todo_view_model.dart';
+import 'package:provider/provider.dart';
 
 class ItemDetailsView extends StatefulWidget {
   const ItemDetailsView({super.key, required this.todoItem});
@@ -20,6 +22,8 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
   void initState() {
     super.initState();
     _controller = TextEditingController();
+    Provider.of<TodoViewModel>(context, listen: false).todoItem =
+        widget.todoItem;
   }
 
   void updateItem(String content) async {
@@ -31,57 +35,42 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Details"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                debugPrint("App bar delete clicked");
-                HttpRequest().deleteTodo(widget.todoItem.id);
-              },
-              icon: const Icon(Icons.delete))
-        ],
       ),
-      body: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: Container(
-          color: Colors.green,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  height: double.infinity,
-                  color: Colors.blue,
-                  child: const Text("Left"),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: TextInputSwitchView(
-                    content: widget.todoItem.content,
+      body: Row(
+        children: [
+          const Spacer(
+            flex: 1,
+          ),
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: Consumer<TodoViewModel>(
+                builder: (context, model, child) {
+                  final todoTitle = model.getTodoItem()?.content ?? "";
+                  return TextInputSwitchView(
+                    content: todoTitle,
                     textStyle:
                         const TextStyle(color: Colors.black, fontSize: 20),
                     inputDecoration: InputDecoration(
-                        hintText: widget.todoItem.content,
+                        hintText: todoTitle,
                         hintStyle: const TextStyle(color: Colors.black),
                         border: InputBorder.none),
-                    addTodoCallback: updateItem,
-                  ),
-                  // child: Text(todoItem.content),
-                ),
+                    // addTodoCallback: updateItem,
+                    addTodoCallback: (String todoContent) {
+                      context
+                          .read<TodoViewModel>()
+                          .updateTodo(widget.todoItem.id, todoContent);
+                    },
+                  );
+                },
               ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  height: double.infinity,
-                  color: Colors.yellow,
-                  child: const Text("Right"),
-                ),
-              ),
-            ],
+              // child: Text(todoItem.content),
+            ),
           ),
-        ),
+          const Spacer(
+            flex: 1,
+          ),
+        ],
       ),
     );
   }
