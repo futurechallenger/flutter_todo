@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/src/controllers/detail_controller.dart';
-import 'package:flutter_todo/src/controllers/home_controller.dart';
+import 'package:flutter_todo/src/getx/controllers/detail_controller.dart';
+import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
 import 'package:flutter_todo/src/getx/pages/detail_page.dart';
 import 'package:flutter_todo/src/getx/pages/home_page.dart';
 import 'package:flutter_todo/src/getx/pages/settings_page.dart';
