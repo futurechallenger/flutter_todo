@@ -44,8 +44,8 @@ class GetxApplication extends StatelessWidget {
 class GetxBindings extends Bindings {
   @override
   void dependencies() {
-    Get.put(TodoRepository(), permanent: true);
-    Get.lazyPut(() => HomeController());
-    Get.lazyPut(() => DetailController());
+    Get.put<TodoRepository>(TodoRepository(), permanent: true);
+    Get.lazyPut<HomeController>(() => HomeController());
+    Get.lazyPut<DetailController>(() => DetailController(), fenix: true);
   }
 }
