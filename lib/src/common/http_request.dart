@@ -6,8 +6,12 @@ import 'package:http/http.dart' as http;
 class HttpRequest {
   final String hostUrl = 'http://localhost:17788';
 
-  Future<List<TodoItem>?> fetchTodoList(String completed) async {
-    final response = await http.get(Uri.parse("$hostUrl/list/$completed"));
+  Future<List<TodoItem>?> fetchTodoList({
+    bool all = false,
+    String completed = 'completed',
+  }) async {
+    final host = all == true ? "$hostUrl/list/all" : "$hostUrl/list/$completed";
+    final response = await http.get(Uri.parse(host));
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;

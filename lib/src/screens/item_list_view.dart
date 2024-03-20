@@ -21,7 +21,7 @@ class _ItemListViewState extends State<ItemListView> {
   void initState() {
     super.initState();
 
-    items = HttpRequest().fetchTodoList('uncompleted');
+    items = HttpRequest().fetchTodoList(completed: 'uncompleted');
   }
 
   @override
@@ -43,7 +43,11 @@ class _ItemListViewState extends State<ItemListView> {
                       // Navigator.restorablePushNamed(
                       //     context, ItemDetailsView.routeName,
                       //     arguments: item.toMap());
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ItemDetailsView(todoItem: item)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ItemDetailsView(todoItem: item)));
                     });
               },
             );
