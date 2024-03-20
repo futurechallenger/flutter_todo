@@ -5,8 +5,8 @@ class TodoRepository {
 
   TodoRepository();
 
-  getAllTodoList() async {
-    return api.fetchTodoList(completed: 'uncompleted');
+  getAllTodoList({bool all = true, String completed = 'completed'}) async {
+    return api.fetchTodoList(all: all, completed: completed);
   }
 
   delete(int id) async {
