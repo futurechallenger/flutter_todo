@@ -17,6 +17,7 @@ class DetailPage extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: TextField(
                     controller: controller.titleEditingController,
+                    focusNode: controller.titleFocusNode,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText: controller.todoItem?.content ?? '',
@@ -32,6 +33,7 @@ class DetailPage extends StatelessWidget {
                       width: double.infinity,
                       child: TextField(
                         controller: controller.noteEditingController,
+                        focusNode: controller.noteFocusNode,
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           hintText: controller.todoItem?.note ?? '',
