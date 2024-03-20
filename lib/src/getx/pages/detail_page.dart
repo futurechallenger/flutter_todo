@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/src/getx/controllers/detail_controller.dart';
+import 'package:get/get.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key});
@@ -6,37 +8,41 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter a search term',
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Container(
-              color: Colors.yellow,
-              child: const SizedBox(
-                height: 190,
-                width: double.infinity,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter a search term',
+      body: GetBuilder(
+          init: Get.find<DetailController>(),
+          builder: (controller) {
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: controller.todoItem?.content ?? '',
+                    ),
                   ),
-                  minLines: 5,
-                  maxLines: 5,
                 ),
-              ),
-            ),
-          )
-        ],
-      ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Container(
+                    color: Colors.yellow,
+                    child: SizedBox(
+                      height: 190,
+                      width: double.infinity,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          hintText: controller.todoItem?.content ?? '',
+                        ),
+                        minLines: 5,
+                        maxLines: 5,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            );
+          }),
     );
   }
 }
