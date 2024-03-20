@@ -16,6 +16,7 @@ class DetailPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextField(
+                    controller: controller.titleEditingController,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText: controller.todoItem?.content ?? '',
@@ -30,9 +31,10 @@ class DetailPage extends StatelessWidget {
                       height: 190,
                       width: double.infinity,
                       child: TextField(
+                        controller: controller.noteEditingController,
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
-                          hintText: controller.todoItem?.content ?? '',
+                          hintText: controller.todoItem?.note ?? '',
                         ),
                         minLines: 5,
                         maxLines: 5,
