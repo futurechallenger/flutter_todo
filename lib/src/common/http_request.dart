@@ -32,6 +32,23 @@ class HttpRequest {
     }
   }
 
+  Future<TodoItem?> fetchTodoById(int todoId) async {
+    final response = await http.get(Uri.parse('$hostUrl/todo/$todoId'));
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      if (body['message'] == 'ok') {
+      } else {
+        return null;
+      }
+
+      final data = body['data'] as Map<String, dynamic>;
+      return TodoItem.fromJson(data);
+    } else {
+      return null;
+    }
+  }
+
   Future<TodoItem> addTodoItem(String todoTitle) async {
     final response = await http.post(Uri.parse("$hostUrl/add"),
         headers: <String, String>{

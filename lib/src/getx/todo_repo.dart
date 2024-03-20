@@ -9,6 +9,10 @@ class TodoRepository {
     return api.fetchTodoList(all: all, completed: completed);
   }
 
+  getTodo(int todoId) async {
+    return api.fetchTodoById(todoId);
+  }
+
   delete(int id) async {
     return api.deleteTodo(id);
   }
