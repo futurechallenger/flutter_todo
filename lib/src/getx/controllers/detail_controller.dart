@@ -15,16 +15,15 @@ class DetailController extends GetxController {
     return _todoItem;
   }
 
-  // late int? _todoId;
-  // set todoId(value) => _todoId = value;
-  // get todoId => _todoId;
-
-  late TextEditingController? titleEditingController;
-  late TextEditingController? noteEditingController;
+  final TextEditingController titleEditingController = TextEditingController();
+  final TextEditingController noteEditingController = TextEditingController();
 
   fetchTodoById(int todoId) async {
     final todo = await Get.find<TodoRepository>().getTodo(todoId);
     todoItem = todo;
+
+    titleEditingController.text = todoItem?.content ?? '';
+    noteEditingController.text = todoItem?.note ?? '';
   }
 
   void updateTodo(TodoItem todoItem) async {

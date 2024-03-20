@@ -69,7 +69,7 @@ class HttpRequest {
   }
 
   Future<void> updateTodo(int id, String todoTitle,
-      {int? status, int? deleted}) async {
+      {String? note, int? status, int? deleted}) async {
     final response = await http.post(Uri.parse("$hostUrl/update"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
@@ -78,6 +78,7 @@ class HttpRequest {
           'todo': {
             'id': id,
             'content': todoTitle,
+            'note': note,
             'status': status,
             'deleted': deleted
           }
