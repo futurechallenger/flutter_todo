@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/detail_controller.dart';
+import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:get/get.dart';
 
 class DetailPage extends StatelessWidget {
@@ -7,9 +8,21 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final todo = ModalRoute.of(context)!.settings.arguments as TodoItem;
+
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Details"),
+        // automaticallyImplyLeading: !kIsWeb,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(context, "refresh");
+          },
+        ),
+      ),
       body: GetBuilder(
           init: Get.find<DetailController>(),
+          initState: (_) => Get.find<DetailController>().fetchTodoById(todo.id),
           builder: (controller) {
             return Column(
               children: [
@@ -48,5 +61,6 @@ class DetailPage extends StatelessWidget {
             );
           }),
     );
+    // );
   }
 }
