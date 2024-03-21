@@ -1,11 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_todo/src/getx/todo_repo.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
-import 'package:flutter_todo/src/screens/add_todo_item.dart';
 import 'package:get/get.dart';
 
 class DetailController extends GetxController {
-  late TodoItem? _todoItem;
+  TodoItem? _todoItem;
   set todoItem(value) {
     _todoItem = value;
     update();
@@ -39,8 +38,8 @@ class DetailController extends GetxController {
 
   @override
   void onInit() async {
-    final todoId = int.parse(Get.parameters['id'] ?? '');
-    await fetchTodoById(todoId);
+    // final todoId = int.parse(Get.parameters['id'] ?? '');
+    // await fetchTodoById(todoId);
 
     // titleEditingController.addListener(() {});
     // noteEditingController.addListener(() {});

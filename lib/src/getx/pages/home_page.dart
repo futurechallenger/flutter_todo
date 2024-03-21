@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
+import 'package:flutter_todo/src/getx/pages/detail_page.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,16 +24,15 @@ class HomePage extends StatelessWidget {
               return ListTile(
                   title: Text(item.content),
                   leading: const Icon(Icons.circle_outlined),
-                  onTap: () {
-                    // Navigator.restorablePushNamed(
-                    //     context, ItemDetailsView.routeName,
-                    //     arguments: item.toMap());
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             ItemDetailsView(todoItem: item)));
-                    Get.toNamed('/detail?id=${item.id}');
+                  onTap: () async {
+                    final result = await Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (builder) => const DetailPage(),
+                            settings: RouteSettings(arguments: item)));
+                    debugPrint("result from prev page is $result");
+                    if (result == 'refresh') {
+                      controller.fetchTodoList();
+                    }
                   });
             },
           ),
