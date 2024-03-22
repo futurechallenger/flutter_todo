@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
 import 'package:flutter_todo/src/getx/pages/detail_page.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -36,23 +35,6 @@ class HomePage extends StatelessWidget {
                   });
             },
           ),
-        )
-
-        // Row(
-        //   children: [
-        //     const Text("Home page"),
-        //     ElevatedButton(
-        //         onPressed: () {
-        //           Get.toNamed("/detail");
-        //         },
-        //         child: const Text("Detail")),
-        //     ElevatedButton(
-        //         onPressed: () {
-        //           Get.toNamed("/settings");
-        //         },
-        //         child: const Text("Settings")),
-        //   ],
-        // ),
-        );
+        ));
   }
 }

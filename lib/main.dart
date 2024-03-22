@@ -9,7 +9,6 @@ import 'package:flutter_todo/src/getx/todo_repo.dart';
 import 'package:flutter_todo/src/view_models/todo_view_model.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'src/settings/settings_controller.dart';
@@ -35,32 +34,14 @@ class GetxApplication extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: GetxBindings(),
-      home: MaterialApp.router(
-        routerConfig: GoRouter(
-            initialLocation: '/',
-            routes: [
-              GoRoute(
-                path: '/',
-                builder: (context, state) => const HomePage(),
-              ),
-              GoRoute(
-                path: '/detail/:id',
-                builder: (context, state) => const DetailPage(),
-              ),
-              GoRoute(
-                path: '/settings',
-                builder: (context, state) => const SettingsPage(),
-              ),
-            ],
-            debugLogDiagnostics: true),
-      ),
-      // initialRoute: '/',
-      // getPages: [
-      //   GetPage(name: '/', page: () => const HomePage()),
-      //   GetPage(name: '/detail', page: () => const DetailPage()),
-      //   GetPage(name: '/settings', page: () => const SettingsPage())
-      // ],
+      home: const HomePage(),
     );
+    // initialRoute: '/',
+    // getPages: [
+    //   GetPage(name: '/', page: () => const HomePage()),
+    //   GetPage(name: '/detail', page: () => const DetailPage()),
+    //   GetPage(name: '/settings', page: () => const SettingsPage())
+    // ],
   }
 }
 
