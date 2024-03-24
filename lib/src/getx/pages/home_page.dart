@@ -40,11 +40,25 @@ class HomePage extends StatelessWidget {
                   },
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(16.0),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: SizedBox(
                   height: 80,
-                  child: TextField(),
+                  child: TextField(
+                    textInputAction: TextInputAction.go,
+                    onSubmitted: (value) async {
+                      debugPrint("Textfield input with go $value");
+                      if (value.isNotEmpty) {
+                        controller.addTodo(todo: value);
+                        controller.inputController.text = '';
+                      }
+                    },
+                    controller: controller.inputController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '',
+                    ),
+                  ),
                 ),
               )
             ],
