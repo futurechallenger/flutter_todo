@@ -73,12 +73,14 @@ class DetailPage extends StatelessWidget {
                             )),
                         const Expanded(flex: 1, child: Text("Hello, world!")),
                         IconButton(
-                            onPressed: () {
+                            onPressed: () async {
                               debugPrint("Delete icon button is clicked");
                               if (controller.todoItem?.id != null) {
-                                Get.find<HomeController>().deleteTodo(
+                                await Get.find<HomeController>().deleteTodo(
                                     todoId: controller.todoItem!.id);
-                                Navigator.pop(context);
+                                if (context.mounted) {
+                                  Navigator.pop(context);
+                                }
                               }
                             },
                             icon: const Icon(Icons.delete))
