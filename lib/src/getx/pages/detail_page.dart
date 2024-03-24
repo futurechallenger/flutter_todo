@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_todo/src/getx/controllers/detail_controller.dart';
+import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:get/get.dart';
 
@@ -56,7 +58,34 @@ class DetailPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
+                const Spacer(flex: 1),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: SizedBox(
+                    height: 80,
+                    child: Row(
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: Container(
+                              color: Colors.green,
+                            )),
+                        const Expanded(flex: 1, child: Text("Hello, world!")),
+                        IconButton(
+                            onPressed: () {
+                              debugPrint("Delete icon button is clicked");
+                              if (controller.todoItem?.id != null) {
+                                Get.find<HomeController>().deleteTodo(
+                                    todoId: controller.todoItem!.id);
+                                Navigator.pop(context);
+                              }
+                            },
+                            icon: const Icon(Icons.delete))
+                      ],
+                    ),
+                  ),
+                ),
               ],
             );
           }),

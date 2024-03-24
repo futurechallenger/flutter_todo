@@ -28,6 +28,11 @@ class HomeController extends GetxController {
     fetchTodoList();
   }
 
+  Future<void> deleteTodo({required int todoId}) async {
+    await Get.find<TodoRepository>().delete(todoId);
+    fetchTodoList();
+  }
+
   @override
   void onInit() {
     fetchTodoList(all: true);
