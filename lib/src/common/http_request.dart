@@ -5,18 +5,21 @@ import 'package:http/http.dart' as http;
 
 class HttpRequest {
   final String hostUrl = 'http://localhost:17788';
+  var _client = http.Client();
+
+  set client(c) => _client = c;
+  get client => _client;
 
   Future<List<TodoItem>?> fetchTodoList({
     bool all = false,
     String completed = 'completed',
   }) async {
     final host = all == true ? "$hostUrl/list/all" : "$hostUrl/list/$completed";
-    final response = await http.get(Uri.parse(host));
+    final response = await _client.get(Uri.parse(host));
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body['message'] == 'ok') {
-      } else {
+      if (body['message'] != 'ok') {
         return null;
       }
 
@@ -33,7 +36,7 @@ class HttpRequest {
   }
 
   Future<TodoItem?> fetchTodoById(int todoId) async {
-    final response = await http.get(Uri.parse('$hostUrl/todo/$todoId'));
+    final response = await _client.get(Uri.parse('$hostUrl/todo/$todoId'));
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
@@ -50,7 +53,7 @@ class HttpRequest {
   }
 
   Future<TodoItem> addTodoItem(String todoTitle) async {
-    final response = await http.post(Uri.parse("$hostUrl/add"),
+    final response = await _client.post(Uri.parse("$hostUrl/add"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -70,7 +73,7 @@ class HttpRequest {
 
   Future<void> updateTodo(int id, String todoTitle,
       {String? note, int? status, int? deleted}) async {
-    final response = await http.post(Uri.parse("$hostUrl/update"),
+    final response = await _client.post(Uri.parse("$hostUrl/update"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -97,7 +100,7 @@ class HttpRequest {
   }
 
   Future<void> deleteTodo(int id) async {
-    final response = await http.delete(
+    final response = await _client.delete(
       Uri.parse("$hostUrl/delete/$id"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
