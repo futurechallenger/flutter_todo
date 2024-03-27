@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
 import 'package:flutter_todo/src/getx/pages/detail_page.dart';
+import 'package:flutter_todo/src/getx/pages/list_row.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,10 +25,9 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     final item = controller.todoList[index];
 
-                    return ListTile(
-                        title: Text(item.content),
-                        leading: const Icon(Icons.circle_outlined),
-                        onTap: () async {
+                    return ListRow(
+                        content: item.content,
+                        navigateTo: () async {
                           final result = await Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (builder) => const DetailPage(),
