@@ -7,7 +7,23 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Settings")),
-      body: const Text("Settings"),
+      body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            children: const [
+              ListTile(
+                title: Text("Sort"),
+              ),
+              Divider(),
+              ListTile(
+                title: Text("Change Theme"),
+              ),
+              Divider(),
+              ListTile(
+                title: Text("Hide Completed Tasks"),
+              )
+            ],
+          )),
     );
   }
 }

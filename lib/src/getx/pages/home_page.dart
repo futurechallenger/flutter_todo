@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: ListView.builder(
+                child: ListView.separated(
                   restorationId: 'sampleItemListView',
                   itemCount: controller.todoList.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -47,6 +47,7 @@ class HomePage extends StatelessWidget {
                           }
                         });
                   },
+                  separatorBuilder: (context, index) => const Divider(),
                 ),
               ),
               Padding(
