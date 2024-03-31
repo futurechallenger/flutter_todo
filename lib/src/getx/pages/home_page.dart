@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
 import 'package:flutter_todo/src/getx/pages/detail_page.dart';
 import 'package:flutter_todo/src/getx/pages/list_row.dart';
+import 'package:flutter_todo/src/getx/pages/settings_page.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,6 +13,14 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Todo"),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (builder) => const SettingsPage()));
+                },
+                icon: const Icon(Icons.settings))
+          ],
         ),
         body: GetBuilder<HomeController>(
           init: Get.find<HomeController>(),
