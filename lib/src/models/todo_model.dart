@@ -1,65 +1,37 @@
-import 'dart:convert';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class TodoItem {
-  final int id;
-  final String content;
-  final String note;
-  final int deleted;
-  final int status;
+part 'todo_model.freezed.dart';
+part 'todo_model.g.dart';
 
-  const TodoItem({
-    required this.id,
-    required this.content,
-    required this.note,
-    required this.status,
-    required this.deleted,
-  });
+@freezed
+class TodoItem with _$TodoItem {
+  const factory TodoItem({
+    int? id,
+    required String content,
+    String? note,
+    int? deleted,
+    int? status,
+  }) = _TodoItem;
 
-  factory TodoItem.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        'id': int id,
-        'content': String content,
-        'note': String note,
-        'status': int status,
-        'deleted': int deleted,
-      } =>
-        TodoItem(
-            id: id,
-            content: content,
-            note: note,
-            status: status,
-            deleted: deleted),
-      _ => throw const FormatException('Failed to load todo item'),
-    };
-  }
+  factory TodoItem.fromJson(Map<String, dynamic> json) =>
+      _$TodoItemFromJson(json);
+}
 
-  String toJson() {
-    return jsonEncode(<String, dynamic>{
-      'id': id,
-      'content': content,
-      'note': note,
-      'status': status,
-      'deleted': deleted,
-    });
-  }
+Map<String, dynamic> convertToMap(TodoItem todo) {
+  return <String, dynamic>{
+    "content": todo.content,
+    "note": todo.note,
+    "id": todo.id,
+    "status": todo.status,
+    "deleted": todo.deleted
+  };
+}
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      "content": content,
-      "note": note,
-      "id": id,
-      "status": status,
-      "deleted": deleted
-    };
-  }
-
-  factory TodoItem.fromMap(Map<String, dynamic> map) {
-    return TodoItem(
-        id: map['id'],
-        content: map['content'],
-        note: map['note'],
-        status: map['status'],
-        deleted: map['deleted']);
-  }
+TodoItem convertToTodoItem(Map<String, dynamic> map) {
+  return TodoItem(
+      id: map['id'],
+      content: map['content'],
+      note: map['note'],
+      status: map['status'],
+      deleted: map['deleted']);
 }

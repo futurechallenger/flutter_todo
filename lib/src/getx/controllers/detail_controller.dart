@@ -32,7 +32,7 @@ class DetailController extends GetxController {
 
   void updateTodo(TodoItem todoItem) async {
     await Get.find<TodoRepository>()
-        .updateTodo(todoItem.id, todoItem.content, todoItem.note);
+        .updateTodo(todoItem.id!, todoItem.content, todoItem.note);
     update();
   }
 

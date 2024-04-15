@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/src/getx/pages/sort_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -10,16 +11,22 @@ class SettingsPage extends StatelessWidget {
       body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView(
-            children: const [
+            children: [
               ListTile(
-                title: Text("Sort"),
+                title: const Text("Sort"),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => const SortPage()));
+                },
               ),
-              Divider(),
-              ListTile(
+              const Divider(),
+              const ListTile(
                 title: Text("Change Theme"),
               ),
-              Divider(),
-              ListTile(
+              const Divider(),
+              const ListTile(
                 title: Text("Hide Completed Tasks"),
               )
             ],
