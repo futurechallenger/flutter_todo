@@ -45,3 +45,5 @@ app.*.map.json
 .vscode/
 
 /md/
+lib/**/*.freezed.dart
+lib/**/*.g.dart

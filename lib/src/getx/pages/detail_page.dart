@@ -24,7 +24,8 @@ class DetailPage extends StatelessWidget {
       ),
       body: GetBuilder(
           init: Get.find<DetailController>(),
-          initState: (_) => Get.find<DetailController>().fetchTodoById(todo.id),
+          initState: (_) =>
+              Get.find<DetailController>().fetchTodoById(todo.id!),
           builder: (controller) {
             return Column(
               children: [
@@ -77,7 +78,7 @@ class DetailPage extends StatelessWidget {
                               debugPrint("Delete icon button is clicked");
                               if (controller.todoItem?.id != null) {
                                 await Get.find<HomeController>().deleteTodo(
-                                    todoId: controller.todoItem!.id);
+                                    todoId: controller.todoItem!.id!);
                                 if (context.mounted) {
                                   Navigator.pop(context);
                                 }

@@ -17,6 +17,8 @@ dependencies:
   http: ^1.2.1
   provider: ^6.1.2
   get:
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
@@ -25,9 +27,11 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   test: ^1.24.9
   mockito: ^5.4.4
-  build_runner: ^2.4.8
+  build_runner: ^2.4.9
   integration_test:
     sdk: flutter
+  freezed: ^2.5.1
+  json_serializable: ^6.7.1
 
 flutter:
   uses-material-design: true
