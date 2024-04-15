@@ -27,7 +27,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
   }
 
   void updateItem(String content) async {
-    await HttpRequest().updateTodo(widget.todoItem.id, content);
+    await HttpRequest().updateTodo(widget.todoItem.id!, content);
   }
 
   @override
@@ -59,7 +59,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                     addTodoCallback: (String todoContent) {
                       context
                           .read<TodoViewModel>()
-                          .updateTodo(widget.todoItem.id, todoContent);
+                          .updateTodo(widget.todoItem.id!, todoContent);
                     },
                   );
                 },
