@@ -18,10 +18,6 @@ class DetailController extends GetxController {
   final TextEditingController titleEditingController = TextEditingController();
   final TextEditingController noteEditingController = TextEditingController();
 
-  // Focus node
-  final titleFocusNode = FocusNode();
-  final noteFocusNode = FocusNode();
-
   fetchTodoById(int todoId) async {
     final todo = await Get.find<TodoRepository>().getTodo(todoId);
     todoItem = todo;
@@ -30,56 +26,21 @@ class DetailController extends GetxController {
     noteEditingController.text = todoItem?.note ?? '';
   }
 
-  void updateTodo(TodoItem todoItem) async {
-    await Get.find<TodoRepository>()
-        .updateTodo(todoItem.id!, todoItem.content, todoItem.note);
+  Future<void> updateTodoV2() async {
+    if (titleEditingController.text.isEmpty) {
+      throw Exception("Todo title is empty");
+    }
+
+    await Get.find<TodoRepository>().updateTodo(
+        todoItem!.id!, titleEditingController.text, noteEditingController.text);
+
     update();
-  }
-
-  @override
-  void onInit() async {
-    // final todoId = int.parse(Get.parameters['id'] ?? '');
-    // await fetchTodoById(todoId);
-
-    // titleEditingController.addListener(() {});
-    // noteEditingController.addListener(() {});
-
-    titleFocusNode.addListener(() {
-      if (!titleFocusNode.hasFocus &&
-          titleEditingController.text.isNotEmpty &&
-          todoItem != null) {
-        todoItem = TodoItem(
-            id: todoItem!.id,
-            content: titleEditingController.text,
-            note: todoItem!.note,
-            status: todoItem!.status,
-            deleted: todoItem!.deleted);
-        updateTodo(todoItem!);
-      }
-    });
-    noteFocusNode.addListener(() {
-      if (!noteFocusNode.hasFocus &&
-          noteEditingController.text.isNotEmpty &&
-          todoItem != null) {
-        todoItem = TodoItem(
-            id: todoItem!.id,
-            content: todoItem!.content,
-            note: noteEditingController.text,
-            status: todoItem!.status,
-            deleted: todoItem!.deleted);
-        updateTodo(todoItem!);
-      }
-    });
-
-    super.onInit();
   }
 
   @override
   void onClose() {
     titleEditingController.dispose();
     noteEditingController.dispose();
-    titleFocusNode.dispose();
-    noteFocusNode.dispose();
 
     super.onClose();
   }
