@@ -4,26 +4,27 @@ import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:get/get.dart';
 
 class DetailController extends GetxController {
-  TodoItem? _todoItem;
+  final rxTodoItem = const TodoItem(content: '').obs;
   set todoItem(value) {
-    _todoItem = value;
-    update();
+    rxTodoItem(value);
   }
 
   TodoItem? get todoItem {
-    return _todoItem;
+    return rxTodoItem.value;
   }
+
+  static DetailController get to => Get.find();
 
   // Text editing controller
   final TextEditingController titleEditingController = TextEditingController();
   final TextEditingController noteEditingController = TextEditingController();
 
-  fetchTodoById(int todoId) async {
+  Future<void> fetchTodoById(int todoId) async {
     final todo = await Get.find<TodoRepository>().getTodo(todoId);
-    todoItem = todo;
+    rxTodoItem(todo);
 
-    titleEditingController.text = todoItem?.content ?? '';
-    noteEditingController.text = todoItem?.note ?? '';
+    // titleEditingController.text = todoItem?.content ?? '';
+    // noteEditingController.text = todoItem?.note ?? '';
   }
 
   Future<void> updateTodoV2() async {
@@ -32,9 +33,9 @@ class DetailController extends GetxController {
     }
 
     await Get.find<TodoRepository>().updateTodo(
-        todoItem!.id!, titleEditingController.text, noteEditingController.text);
+        todoItem!.id!, rxTodoItem.value.content, rxTodoItem.value.note);
 
-    update();
+    // update();
   }
 
   @override
