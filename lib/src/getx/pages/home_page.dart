@@ -37,10 +37,12 @@ class HomePage extends StatelessWidget {
                     return ListRow(
                         content: item.content,
                         navigateTo: () async {
-                          final result = await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (builder) => const DetailPage(),
-                                  settings: RouteSettings(arguments: item)));
+                          final result = await Navigator.of(context)
+                              .push(MaterialPageRoute(
+                            builder: (builder) => DetailPage(
+                              todoItem: item,
+                            ),
+                          ));
                           debugPrint("result from prev page is $result");
                           if (result == 'refresh') {
                             controller.fetchTodoList();
