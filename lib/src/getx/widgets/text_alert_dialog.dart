@@ -10,10 +10,12 @@ Future<void> showTextAlertDialog(
       builder: (context) => PopScope(
           onPopInvoked: (didPop) {
             debugPrint("on pop invoked called");
-            controller.titleEditingController.text = '';
-            controller.noteEditingController.text = '';
+            controller.resetTextController();
           },
-          child: TextAlertDialog(controller: controller)));
+          child: TextAlertDialog(
+            controller: controller,
+            isTitle: isTitle,
+          )));
 }
 
 class TextAlertDialog extends StatelessWidget {

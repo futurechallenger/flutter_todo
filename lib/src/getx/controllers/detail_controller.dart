@@ -20,11 +20,12 @@ class DetailController extends GetxController {
   final TextEditingController noteEditingController = TextEditingController();
 
   Future<void> fetchTodoById(int todoId) async {
-    final todo = await Get.find<TodoRepository>().getTodo(todoId);
-    rxTodoItem(todo);
+    final TodoItem todo = await Get.find<TodoRepository>().getTodo(todoId);
 
-    // titleEditingController.text = todoItem?.content ?? '';
-    // noteEditingController.text = todoItem?.note ?? '';
+    titleEditingController.text = todo.content;
+    noteEditingController.text = todo.note ?? '';
+
+    rxTodoItem(todo);
   }
 
   Future<void> updateTodoV2() async {
@@ -38,8 +39,15 @@ class DetailController extends GetxController {
     // update();
   }
 
+  void resetTextController() {
+    titleEditingController.text = rxTodoItem.value.content;
+    noteEditingController.text = rxTodoItem.value.note ?? '';
+  }
+
   @override
   void onClose() {
+    debugPrint("detail controller closed");
+
     titleEditingController.dispose();
     noteEditingController.dispose();
 

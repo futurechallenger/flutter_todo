@@ -13,15 +13,18 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // controller.fetchTodoById(todo.id!);
-
     return Scaffold(
         appBar: AppBar(
           title: const Text("Details"),
-          leading: BackButton(
-            onPressed: () {
-              Navigator.pop(context, "refresh");
+          leading: PopScope(
+            onPopInvoked: (didPop) {
+              debugPrint('detail page pop');
             },
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context, "refresh");
+              },
+            ),
           ),
           actions: [
             TextButton(
