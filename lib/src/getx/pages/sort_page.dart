@@ -5,19 +5,17 @@ class SortPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              // height: double.infinity,
-              // width: double.infinity,
-              color: Colors.amber,
-              child: const Text("Sort by..."),
-            ),
-          ),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Sort by"),
+      ),
+      body: const SingleChildScrollView(
+        child: ListBody(
+          children: [
+            ListTile(title: Text("Create Date")),
+            ListTile(title: Text("Due Date")),
+          ],
+        ),
       ),
     );
   }
