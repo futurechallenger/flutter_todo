@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/src/getx/controllers/detail_controller.dart';
+import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
 import 'package:flutter_todo/src/getx/pages/sort_page.dart';
+import 'package:get/get.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
+
     return Scaffold(
       appBar: AppBar(title: const Text("Settings")),
       body: Padding(
@@ -15,10 +20,54 @@ class SettingsPage extends StatelessWidget {
               ListTile(
                 title: const Text("Sort"),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (builder) => const SortPage()));
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) => SafeArea(
+                            child: SingleChildScrollView(
+                              child: ListBody(
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Center(child: Text("Sort by")),
+                                  ),
+                                  Obx(() => ListTile(
+                                        title: const Text("Due Date"),
+                                        trailing:
+                                            controller.hasSuchField('due date')
+                                                ? const Icon(
+                                                    Icons.check,
+                                                    color: Colors.blue,
+                                                  )
+                                                : null,
+                                        selected:
+                                            controller.hasSuchField('due date'),
+                                        onTap: () {
+                                          controller.toggleSorting(SortType(
+                                              sortField: 'due date',
+                                              order: 'desc'));
+                                        },
+                                      )),
+                                  Obx(() => ListTile(
+                                        title: const Text("Creation Date"),
+                                        selected: controller
+                                            .hasSuchField('creation date'),
+                                        trailing: controller
+                                                .hasSuchField('creation date')
+                                            ? const Icon(
+                                                Icons.check,
+                                                color: Colors.blue,
+                                              )
+                                            : null,
+                                        onTap: () {
+                                          controller.toggleSorting(SortType(
+                                              sortField: 'creation date',
+                                              order: 'desc'));
+                                        },
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ));
                 },
               ),
               const Divider(),
