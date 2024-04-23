@@ -12,13 +12,6 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
-        actions: [
-          TextButton(
-              onPressed: () {
-                controller.testString.value = "hello world";
-              },
-              child: const Text('click'))
-        ],
       ),
       body: Padding(
           padding: const EdgeInsets.all(8.0),
