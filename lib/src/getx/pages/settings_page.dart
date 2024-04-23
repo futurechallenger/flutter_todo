@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/src/getx/controllers/detail_controller.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
-import 'package:flutter_todo/src/getx/pages/sort_page.dart';
 import 'package:get/get.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -12,7 +10,16 @@ class SettingsPage extends StatelessWidget {
     final controller = Get.find<HomeController>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Settings")),
+      appBar: AppBar(
+        title: const Text("Settings"),
+        actions: [
+          TextButton(
+              onPressed: () {
+                controller.testString.value = "hello world";
+              },
+              child: const Text('click'))
+        ],
+      ),
       body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView(

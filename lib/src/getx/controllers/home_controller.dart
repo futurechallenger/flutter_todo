@@ -12,7 +12,7 @@ class SortType {
 
 class HomeController extends GetxController {
   late List<TodoItem> _todoList = [];
-  final _sortings = <SortType>[].obs;
+  RxList<SortType> _sortings = <SortType>[].obs;
 
   get todoList => _todoList;
   set todoList(value) {
@@ -20,9 +20,9 @@ class HomeController extends GetxController {
     update();
   }
 
-  get sortings => _sortings;
-  set sortings(value) {
-    _sortings.add(value);
+  RxList<SortType> get sortings => _sortings;
+  set sortings(List<SortType> value) {
+    _sortings = value.obs;
   }
 
   final TextEditingController inputController = TextEditingController();
@@ -38,8 +38,14 @@ class HomeController extends GetxController {
     _sortings.removeWhere((e) => e.sortField == sortType.sortField);
   }
 
+  void removeSortingField(String fieldName) {
+    if (_sortings.where((p0) => p0.sortField == fieldName).isEmpty) return;
+
+    _sortings.removeWhere((e) => e.sortField == fieldName);
+  }
+
   bool hasSuchField(String field) {
-    return sortings.where((e) => e.sortField == field).length > 0;
+    return sortings.where((e) => e.sortField == field).isNotEmpty;
   }
 
   Future<void> fetchTodoList(
