@@ -49,7 +49,7 @@ class GetxBindings extends Bindings {
   @override
   void dependencies() {
     Get.put<TodoRepository>(TodoRepository(), permanent: true);
-    Get.lazyPut<HomeController>(() => HomeController());
+    Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     // Get.lazyPut<DetailController>(() => DetailController(), fenix: true);
     Get.lazyPut<DetailController>(() => DetailController());
   }
