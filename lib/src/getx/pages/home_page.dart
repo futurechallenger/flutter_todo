@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
 import 'package:flutter_todo/src/getx/pages/detail_page.dart';
 import 'package:flutter_todo/src/getx/pages/list_row.dart';
@@ -26,6 +28,8 @@ class HomePage extends StatelessWidget {
           init: Get.find<HomeController>(),
           builder: (controller) => Column(
             children: [
+              // SizedBox(height: 100, width: 500, child: getSortControl()),
+              getSortControl(),
               Expanded(
                 flex: 1,
                 child: ListView.separated(
@@ -76,5 +80,41 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  Widget getSortControl() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextButton(
+                onPressed: () {},
+                child: const Wrap(children: [
+                  Text("Due Date"),
+                  Icon(
+                    Icons.arrow_drop_down,
+                  )
+                ])),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.close,
+                ))
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextButton(
+                onPressed: () {},
+                child: const Wrap(
+                    children: [Text("Due Date"), Icon(Icons.arrow_drop_down)])),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.close))
+          ],
+        )
+      ],
+    );
   }
 }
