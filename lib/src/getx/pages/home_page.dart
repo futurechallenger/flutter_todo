@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => const Text("Todo")),
+        title: const Text("Todo"),
         actions: [
           IconButton(
               onPressed: () {
@@ -102,12 +102,20 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   TextButton(
-                      onPressed: () {},
-                      child: const Wrap(children: [
-                        Text("Due Date"),
-                        Icon(
-                          Icons.arrow_drop_down,
-                        )
+                      onPressed: () {
+                        debugPrint('creation date clicked');
+                        final sortType = _.getSortObserver('due date');
+                        if (sortType == null) return;
+
+                        sortType(SortType(
+                            sortField: sortType.value.sortField,
+                            order: sortType.value.order == 'desc'
+                                ? 'asc'
+                                : 'desc'));
+                      },
+                      child: Wrap(children: [
+                        const Text("Due Date"),
+                        getIconByOrder(_, 'due date')
                       ])),
                   IconButton(
                       onPressed: () {
@@ -125,10 +133,25 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   TextButton(
-                      onPressed: () {},
-                      child: const Wrap(children: [
-                        Text("Creation Date"),
-                        Icon(Icons.arrow_drop_down)
+                      onPressed: () {
+                        debugPrint('creation date clicked');
+                        final sortType = _.getSortObserver('creation date');
+                        if (sortType == null) return;
+
+                        sortType(SortType(
+                            sortField: sortType.value.sortField,
+                            order: sortType.value.order == 'desc'
+                                ? 'asc'
+                                : 'desc'));
+                      },
+                      child: Wrap(children: [
+                        const Text("Creation Date"),
+                        // getIconByOrder(_, 'creation date')
+                        Obx(() =>
+                            _.getSortObserver('creation date')?.value.order ==
+                                    'desc'
+                                ? const Icon(Icons.arrow_drop_down)
+                                : const Icon(Icons.arrow_drop_up))
                       ])),
                   IconButton(
                       onPressed: () {
@@ -143,5 +166,14 @@ class HomePage extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget getIconByOrder(HomeController controller, String fieldName) {
+    final creationDateSort = controller.getSortObserver(fieldName);
+    if (creationDateSort == null || creationDateSort.value.order == 'desc') {
+      return const Icon(Icons.arrow_drop_down);
+    } else {
+      return const Icon(Icons.arrow_drop_up);
+    }
   }
 }
