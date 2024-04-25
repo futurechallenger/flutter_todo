@@ -82,4 +82,20 @@ class SettingsPage extends StatelessWidget {
           )),
     );
   }
+
+  Widget getWidget() {
+    const widgets = [Text("text 1"), Text("text 2")];
+    return const Column(
+      children: [...widgets],
+    );
+  }
+
+  final value = 111;
+  Widget getWidget2() {
+    return Column(
+      children: [
+        if (value == 1) ...[const Text("text1"), const Text("text2")]
+      ],
+    );
+  }
 }

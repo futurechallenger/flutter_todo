@@ -11,8 +11,8 @@ class SortType {
 }
 
 class HomeController extends GetxController {
-  late List<TodoItem> _todoList = [];
-  RxList<SortType> _sortings = <SortType>[].obs;
+  List<TodoItem> _todoList = [];
+  RxList<Rx<SortType>> _sortings = <Rx<SortType>>[].obs;
 
   get todoList => _todoList;
   set todoList(value) {
@@ -20,32 +20,45 @@ class HomeController extends GetxController {
     update();
   }
 
-  RxList<SortType> get sortings => _sortings;
-  set sortings(List<SortType> value) {
-    _sortings = value.obs;
+  RxList<Rx<SortType>> get sortings => _sortings;
+  set sortings(RxList<Rx<SortType>> sortList) {
+    if (sortList.isEmpty) {
+      _sortings = <Rx<SortType>>[].obs;
+    }
+
+    _sortings = sortList;
   }
 
   final TextEditingController inputController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
   void toggleSorting(SortType sortType) {
-    final result = _sortings.where((e) => e.sortField == sortType.sortField);
+    final result =
+        _sortings.where((e) => e.value.sortField == sortType.sortField);
     if (result.isEmpty) {
-      _sortings.add(sortType);
+      _sortings.add(sortType.obs);
       return;
     }
 
-    _sortings.removeWhere((e) => e.sortField == sortType.sortField);
+    _sortings.removeWhere((e) => e.value.sortField == sortType.sortField);
   }
 
   void removeSortingField(String fieldName) {
-    if (_sortings.where((p0) => p0.sortField == fieldName).isEmpty) return;
+    if (_sortings.where((p0) => p0.value.sortField == fieldName).isEmpty) {
+      return;
+    }
 
-    _sortings.removeWhere((e) => e.sortField == fieldName);
+    _sortings.removeWhere((e) => e.value.sortField == fieldName);
   }
 
   bool hasSuchField(String field) {
-    return sortings.where((e) => e.sortField == field).isNotEmpty;
+    return sortings.where((e) => e.value.sortField == field).isNotEmpty;
+  }
+
+  Rx<SortType>? getSortObserver(String fieldName) {
+    final sortType = sortings
+        .firstWhereOrNull((element) => element.value.sortField == fieldName);
+    return sortType;
   }
 
   Future<void> fetchTodoList(
