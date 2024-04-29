@@ -146,7 +146,8 @@ class HomePage extends StatelessWidget {
                       },
                       child: Wrap(children: [
                         const Text("Creation Date"),
-                        // getIconByOrder(_, 'creation date')
+                        // No need obx here?
+                        // Inside `GetX`, an obx is ok, but in `GetBuilder` it's no ok
                         Obx(() =>
                             _.getSortObserver('creation date')?.value.order ==
                                     'desc'
