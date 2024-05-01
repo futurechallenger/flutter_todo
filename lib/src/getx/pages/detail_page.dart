@@ -74,6 +74,18 @@ class DetailPage extends StatelessWidget {
                           () => Text(_.rxTodoItem().note ?? 'No note added'))),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Container(
+                  height: 50.0,
+                  color: Colors.lightBlueAccent,
+                  child: TextButton(
+                      onPressed: () {
+                        // TODO: add event to calendar for android, ios and desktop(macOs).
+                      },
+                      child: const Text('Add to Calendar')),
+                ),
+              ),
               const Spacer(
                 flex: 1,
               ),
