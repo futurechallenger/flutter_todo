@@ -90,6 +90,15 @@ class SettingsPage extends StatelessWidget {
                 title: const Text("Responsive Layout"),
               ),
               const Divider(),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ResponsivePage()));
+                },
+                title: const Text("Stream"),
+              ),
             ],
           )),
     );
