@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
 import 'package:flutter_todo/src/getx/pages/responsive_page.dart';
+import 'package:flutter_todo/src/getx/pages/stream_page.dart';
 import 'package:get/get.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -90,6 +91,15 @@ class SettingsPage extends StatelessWidget {
                 title: const Text("Responsive Layout"),
               ),
               const Divider(),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const StreamPage()));
+                },
+                title: const Text("Stream"),
+              ),
             ],
           )),
     );
