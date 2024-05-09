@@ -93,10 +93,8 @@ class SettingsPage extends StatelessWidget {
               const Divider(),
               ListTile(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const StreamPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => StreamPage()));
                 },
                 title: const Text("Stream"),
               ),
