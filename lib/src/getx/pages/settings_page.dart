@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
-import 'package:flutter_todo/src/getx/pages/animation_category_page.dart';
+import 'package:flutter_todo/src/getx/pages/physis_animation_page.dart';
 import 'package:flutter_todo/src/getx/pages/responsive_page.dart';
 import 'package:flutter_todo/src/getx/pages/stream_page.dart';
 import 'package:get/get.dart';
@@ -103,10 +103,7 @@ class SettingsPage extends StatelessWidget {
               const Divider(),
               ListTile(
                 onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => AnimationCategoryPage()));
+
                   _showActionSheet(context);
                 },
                 title: const Text("Animation"),
@@ -141,9 +138,22 @@ class SettingsPage extends StatelessWidget {
               message: const Text("Message"),
               actions: [
                 CupertinoActionSheetAction(
-                  onPressed: () {},
-                  child: const Text("Animation 1"),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PhysicsAnimation()));
+                  },
                   isDefaultAction: true,
+                  child: const Text("Physics-Based Animation"),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {},
+                  child: const Text("Animation 2"),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {},
+                  child: const Text("Animation 3"),
                 )
               ],
             ));
