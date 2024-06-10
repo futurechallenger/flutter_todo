@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
+import 'package:flutter_todo/src/getx/pages/animation_category_page.dart';
 import 'package:flutter_todo/src/getx/pages/responsive_page.dart';
 import 'package:flutter_todo/src/getx/pages/stream_page.dart';
 import 'package:get/get.dart';
@@ -98,6 +100,17 @@ class SettingsPage extends StatelessWidget {
                 },
                 title: const Text("Stream"),
               ),
+              const Divider(),
+              ListTile(
+                onTap: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => AnimationCategoryPage()));
+                  _showActionSheet(context);
+                },
+                title: const Text("Animation"),
+              ),
             ],
           )),
     );
@@ -111,11 +124,28 @@ class SettingsPage extends StatelessWidget {
   }
 
   final value = 111;
+
   Widget getWidget2() {
     return Column(
       children: [
         if (value == 1) ...[const Text("text1"), const Text("text2")]
       ],
     );
+  }
+
+  void _showActionSheet(BuildContext context) {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (context) => CupertinoActionSheet(
+              title: const Text("Animations"),
+              message: const Text("Message"),
+              actions: [
+                CupertinoActionSheetAction(
+                  onPressed: () {},
+                  child: const Text("Animation 1"),
+                  isDefaultAction: true,
+                )
+              ],
+            ));
   }
 }
