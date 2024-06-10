@@ -6,6 +6,8 @@ import 'package:flutter_todo/src/getx/pages/responsive_page.dart';
 import 'package:flutter_todo/src/getx/pages/stream_page.dart';
 import 'package:get/get.dart';
 
+import 'animations/tween_animation_page.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -142,18 +144,23 @@ class SettingsPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const PhysicsAnimation()));
+                            builder: (context) => const TweenAnimationPage()));
                   },
                   isDefaultAction: true,
-                  child: const Text("Physics-Based Animation"),
+                  child: const Text("Tween Animation"),
                 ),
                 CupertinoActionSheetAction(
                   onPressed: () {},
                   child: const Text("Animation 2"),
                 ),
                 CupertinoActionSheetAction(
-                  onPressed: () {},
-                  child: const Text("Animation 3"),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PhysicsAnimation()));
+                  },
+                  child: const Text("Physics-Based Animation"),
                 )
               ],
             ));
