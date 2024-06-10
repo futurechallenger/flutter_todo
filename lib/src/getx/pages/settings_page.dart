@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
-import 'package:flutter_todo/src/getx/pages/physis_animation_page.dart';
+import 'package:flutter_todo/src/getx/pages/physics_animation_page.dart';
 import 'package:flutter_todo/src/getx/pages/responsive_page.dart';
 import 'package:flutter_todo/src/getx/pages/stream_page.dart';
 import 'package:get/get.dart';
+import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 
 import 'animations/tween_animation_page.dart';
 
@@ -105,7 +105,6 @@ class SettingsPage extends StatelessWidget {
               const Divider(),
               ListTile(
                 onTap: () {
-
                   _showActionSheet(context);
                 },
                 title: const Text("Animation"),
@@ -133,36 +132,23 @@ class SettingsPage extends StatelessWidget {
   }
 
   void _showActionSheet(BuildContext context) {
-    showCupertinoModalPopup(
-        context: context,
-        builder: (context) => CupertinoActionSheet(
-              title: const Text("Animations"),
-              message: const Text("Message"),
-              actions: [
-                CupertinoActionSheetAction(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TweenAnimationPage()));
-                  },
-                  isDefaultAction: true,
-                  child: const Text("Tween Animation"),
-                ),
-                CupertinoActionSheetAction(
-                  onPressed: () {},
-                  child: const Text("Animation 2"),
-                ),
-                CupertinoActionSheetAction(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PhysicsAnimation()));
-                  },
-                  child: const Text("Physics-Based Animation"),
-                )
-              ],
-            ));
+    showAdaptiveActionSheet(context: context, actions: [
+      BottomSheetAction(
+          title: const Text("Tween Animation"),
+          onPressed: (context) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const TweenAnimationPage()));
+          }),
+      BottomSheetAction(
+          title: const Text("Physics Animation"),
+          onPressed: (context) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PhysicsAnimationPage()));
+          }),
+    ]);
   }
 }

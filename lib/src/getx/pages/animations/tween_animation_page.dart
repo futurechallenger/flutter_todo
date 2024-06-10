@@ -29,6 +29,9 @@ class _TweenAnimationPageState extends State<TweenAnimationPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Tween Animation"),
+      ),
       body: Center(
         child: Opacity(
             opacity: _animation.value, child: const Text("Tween Animation")),
