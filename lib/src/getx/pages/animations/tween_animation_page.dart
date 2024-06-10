@@ -5,6 +5,6 @@ class TweenAnimationPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return const Column(children: [const Text("Tween Animation")],);
+    return const Column(children: [Text("Tween Animation")],);
   }
 }
