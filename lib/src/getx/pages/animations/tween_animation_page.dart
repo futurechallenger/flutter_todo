@@ -38,4 +38,10 @@ class _TweenAnimationPageState extends State<TweenAnimationPage>
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
