@@ -11,6 +11,7 @@ class _TweenAnimationPageState extends State<TweenAnimationPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  late Animation _colorAnimation;
 
   @override
   void initState() {
@@ -23,6 +24,12 @@ class _TweenAnimationPageState extends State<TweenAnimationPage>
         setState(() {});
       });
 
+    _colorAnimation =
+        ColorTween(begin: Colors.white, end: Colors.orange).animate(_controller)
+          ..addListener(() {
+            setState(() {});
+          });
+
     _controller.repeat(reverse: true);
   }
 
@@ -34,7 +41,11 @@ class _TweenAnimationPageState extends State<TweenAnimationPage>
       ),
       body: Center(
         child: Opacity(
-            opacity: _animation.value, child: const Text("Tween Animation")),
+            opacity: _animation.value,
+            child: Text(
+              "Tween Animation",
+              style: TextStyle(color: _colorAnimation.value),
+            )),
       ),
     );
   }
