@@ -19,16 +19,20 @@ class _TweenAnimationPageState extends State<TweenAnimationPage>
 
     _controller =
         AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    _animation = Tween<double>(begin: 0, end: 1).animate(_controller)
+
+    final curvedAnimation =
+        CurvedAnimation(parent: _controller, curve: Curves.bounceInOut);
+
+    _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation)
       ..addListener(() {
         setState(() {});
       });
 
-    _colorAnimation =
-        ColorTween(begin: Colors.white, end: Colors.orange).animate(_controller)
-          ..addListener(() {
-            setState(() {});
-          });
+    _colorAnimation = ColorTween(begin: Colors.white, end: Colors.orange)
+        .animate(curvedAnimation)
+      ..addListener(() {
+        setState(() {});
+      });
 
     _controller.repeat(reverse: true);
   }
@@ -44,7 +48,7 @@ class _TweenAnimationPageState extends State<TweenAnimationPage>
             opacity: _animation.value,
             child: Text(
               "Tween Animation",
-              style: TextStyle(color: _colorAnimation.value),
+              style: TextStyle(color: _colorAnimation.value, fontSize: 25),
             )),
       ),
     );
