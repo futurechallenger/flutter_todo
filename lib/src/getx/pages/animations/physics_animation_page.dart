@@ -11,7 +11,6 @@ class PhysicsAnimationPage extends StatefulWidget {
 class _PhysicsAnimationPageState extends State<PhysicsAnimationPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  // late Animation<double> _animation;
 
   @override
   void initState() {
@@ -22,16 +21,12 @@ class _PhysicsAnimationPageState extends State<PhysicsAnimationPage>
         setState(() {});
       });
 
-    // _animation = Tween<double>(begin: 0, end: 400).animate(
-    //     CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
-
     final simulation = SpringSimulation(
         const SpringDescription(mass: 1, stiffness: 10, damping: 1),
         0,
         300,
         10);
 
-    // _controller.forward();
     _controller.animateWith(simulation);
   }
 
@@ -47,34 +42,11 @@ class _PhysicsAnimationPageState extends State<PhysicsAnimationPage>
             top: _controller.value,
             height: 40,
             width: 40,
-            child: GestureDetector(
-              // onPanEnd: (details) {
-              //   _startAnimation(details.velocity.pixelsPerSecond.dx);
-              // },
-              onTap: () {
-                // _startAnimation(10);
-              },
-              child: Container(
-                color: Colors.blue,
-              ),
+            child: Container(
+              color: Colors.blue,
             ),
           ),
         ]));
-  }
-
-  void _startAnimation(double velocity) {
-    final simulation = SpringSimulation(
-      const SpringDescription(
-        mass: 1,
-        stiffness: 100,
-        damping: 1,
-      ),
-      _controller.value,
-      500, // end position
-      20,
-    );
-
-    _controller.animateWith(simulation);
   }
 
   @override
