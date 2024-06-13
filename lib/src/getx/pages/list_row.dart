@@ -9,7 +9,10 @@ class ListRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        title: Text(content),
+        title: Text(
+          content,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
         leading: const Icon(Icons.circle_outlined),
         onTap: () {
           navigateTo();

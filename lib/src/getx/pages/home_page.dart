@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
+import 'package:flutter_todo/src/getx/pages/animations/hero_animation_page.dart';
 import 'package:flutter_todo/src/getx/pages/detail_page.dart';
 import 'package:flutter_todo/src/getx/pages/list_row.dart';
 import 'package:flutter_todo/src/getx/pages/settings_page.dart';
@@ -45,20 +46,36 @@ class HomePage extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         final item = controller.todoList[index];
 
-                        return ListRow(
-                            content: item.content,
-                            navigateTo: () async {
-                              final result = await Navigator.of(context)
-                                  .push(MaterialPageRoute(
-                                builder: (builder) => DetailPage(
-                                  todoItem: item,
-                                ),
-                              ));
-                              debugPrint("result from prev page is $result");
-                              if (result == 'refresh') {
-                                controller.fetchTodoList();
-                              }
-                            });
+                        return Hero(
+                          tag: item.content,
+                          child: Material(
+                            type: MaterialType.transparency,
+                            child: InkWell(
+                              child: ListRow(
+                                  content: item.content,
+                                  navigateTo: () async {
+                                    final result = await Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (builder) {
+                                        if (index == 0) {
+                                          return HeroAnimationPage(
+                                            todoItem: item,
+                                          );
+                                        }
+                                        return DetailPage(
+                                          todoItem: item,
+                                        );
+                                      },
+                                    ));
+                                    debugPrint(
+                                        "result from prev page is $result");
+                                    if (result == 'refresh') {
+                                      controller.fetchTodoList();
+                                    }
+                                  }),
+                            ),
+                          ),
+                        );
                       },
                       separatorBuilder: (context, index) => const Divider(),
                     )),
