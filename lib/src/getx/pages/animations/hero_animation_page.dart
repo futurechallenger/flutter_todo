@@ -15,7 +15,8 @@ class _HeroAnimationPageState extends State<HeroAnimationPage>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    timeDilation = 5.0;
+    // TODO: only for test
+    timeDilation = 3.0;
 
     final content = widget.todoItem.content;
     return Scaffold(
