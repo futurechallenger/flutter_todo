@@ -45,35 +45,32 @@ class HomePage extends StatelessWidget {
                       itemCount: controller.todoList.length,
                       itemBuilder: (BuildContext context, int index) {
                         final item = controller.todoList[index];
-
                         return Hero(
                           tag: item.content,
                           child: Material(
                             type: MaterialType.transparency,
-                            child: InkWell(
-                              child: ListRow(
-                                  content: item.content,
-                                  navigateTo: () async {
-                                    final result = await Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (builder) {
-                                        if (index == 0) {
-                                          return HeroAnimationPage(
-                                            todoItem: item,
-                                          );
-                                        }
-                                        return DetailPage(
+                            child: ListRow(
+                                content: item.content,
+                                navigateTo: () async {
+                                  final result = await Navigator.of(context)
+                                      .push(MaterialPageRoute(
+                                    builder: (builder) {
+                                      if (index == 0) {
+                                        return HeroAnimationPage(
                                           todoItem: item,
                                         );
-                                      },
-                                    ));
-                                    debugPrint(
-                                        "result from prev page is $result");
-                                    if (result == 'refresh') {
-                                      controller.fetchTodoList();
-                                    }
-                                  }),
-                            ),
+                                      }
+                                      return DetailPage(
+                                        todoItem: item,
+                                      );
+                                    },
+                                  ));
+                                  debugPrint(
+                                      "result from prev page is $result");
+                                  if (result == 'refresh') {
+                                    controller.fetchTodoList();
+                                  }
+                                }),
                           ),
                         );
                       },
