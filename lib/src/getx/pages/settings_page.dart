@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
+import 'package:flutter_todo/src/getx/pages/animations/implicit_animation_page.dart';
 import 'package:flutter_todo/src/getx/pages/animations/physics_animation_page.dart';
 import 'package:flutter_todo/src/getx/pages/responsive_page.dart';
 import 'package:flutter_todo/src/getx/pages/stream_page.dart';
@@ -148,6 +149,14 @@ class SettingsPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => const PhysicsAnimationPage()));
+          }),
+      BottomSheetAction(
+          title: const Text("Implicit Animation"),
+          onPressed: (context) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ImplicitAnimationPage()));
           }),
     ]);
   }
