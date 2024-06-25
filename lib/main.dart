@@ -10,6 +10,7 @@ import 'package:flutter_todo/src/view_models/todo_view_model.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:calendar_plugin/calendar_plugin.dart';
 
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';

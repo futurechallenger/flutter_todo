@@ -129,6 +129,15 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "8.9.2"
+  calendar_plugin:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: e134a2259a600bd02ec4ffc0bb773bd9b06a4683
+      url: "https://github.com/futurechallenger/calendar_plugin.git"
+    source: git
+    version: "0.0.1"
   characters:
     dependency: transitive
     description:
@@ -511,6 +520,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.4"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.8"
   pool:
     dependency: transitive
     description:
@@ -789,5 +806,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.3.0 <4.0.0"
+  dart: ">=3.4.0-282.3.beta <4.0.0"
   flutter: ">=3.18.0-18.0.pre.54"
