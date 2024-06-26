@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 
 import 'animations/tween_animation_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -18,7 +19,7 @@ class SettingsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: Text(AppLocalizations.of(context)!.settings),
       ),
       body: Padding(
           padding: const EdgeInsets.all(8.0),
