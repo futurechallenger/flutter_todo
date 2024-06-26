@@ -37,11 +37,11 @@ class GetxApplication extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      // supportedLocales: AppLocalizations.supportedLocales,
-      supportedLocales: const [
-        Locale('en'),
-        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
-      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      // supportedLocales: const [
+      //   Locale('en'),
+      //   Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+      // ],
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       initialBinding: GetxBindings(),
       home: const HomePage(),
