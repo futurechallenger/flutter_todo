@@ -12,6 +12,8 @@ import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:calendar_plugin/calendar_plugin.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 
@@ -34,6 +36,13 @@ class GetxApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      // supportedLocales: const [
+      //   Locale('en'),
+      //   Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+      // ],
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       initialBinding: GetxBindings(),
       home: const HomePage(),
     );

@@ -5,6 +5,7 @@ import 'package:flutter_todo/src/getx/pages/detail_page.dart';
 import 'package:flutter_todo/src/getx/pages/list_row.dart';
 import 'package:flutter_todo/src/getx/pages/settings_page.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Todo"),
+        title: Text(AppLocalizations.of(context)!.todo),
         actions: [
           IconButton(
               onPressed: () {
