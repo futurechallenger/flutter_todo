@@ -24,6 +24,7 @@ dependencies:
     git:
       url: https://github.com/futurechallenger/calendar_plugin.git
       ref: main
+  intl: any
 
 
 dev_dependencies:
