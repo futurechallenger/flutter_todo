@@ -4,6 +4,12 @@ import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
 import 'package:flutter_todo/src/getx/widgets/text_alert_dialog.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+String todoStatusString(int? status) {
+  if (status == null || status == 0) return 'in progress';
+  return 'completed';
+}
 
 class DetailPage extends StatelessWidget {
   DetailPage({super.key, required this.todoItem});
@@ -85,6 +91,16 @@ class DetailPage extends StatelessWidget {
                       },
                       child: const Text('Add to Calendar')),
                 ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Container(
+                    height: 50.0,
+                    color: Colors.lightBlueAccent,
+                    child: Center(
+                        child: Text(AppLocalizations.of(context)!.todoStatus(
+                            todoStatusString(_.rxTodoItem().status),
+                            _.rxTodoItem().content)))),
               ),
               const Spacer(
                 flex: 1,

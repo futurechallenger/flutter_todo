@@ -1,5 +1,20 @@
 {
   "appTitle": "Todo",
   "todo": "Todo",
-  "settings": "Settings"
+  "settings": "Settings",
+
+  "todoStatus": "{todoTitle} is {status}",
+  "@todoTitle": {
+    "description": "Todo status",
+    "placeholders": {
+      "todoTitle": {
+        "type": "String",
+        "example": "Leg day"
+      },
+      "status": {
+        "type": "String",
+        "example": "completed"
+      }
+    }
+  }
 }

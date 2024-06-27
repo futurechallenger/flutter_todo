@@ -2,5 +2,6 @@
     "@@locale": "zh",
     "appTitle": "提醒事项",
     "todo": "提醒事项",
-    "settings": "设置"
+    "settings": "设置",
+    "todoStatus": "{todoTitle}的状态是{status}"
 }
