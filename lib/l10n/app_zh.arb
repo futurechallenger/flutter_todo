@@ -1,7 +1,28 @@
 {
-    "@@locale": "zh",
-    "appTitle": "提醒事项",
-    "todo": "提醒事项",
-    "settings": "设置",
-    "todoStatus": "{todoTitle}的状态是{status}"
+  "@@locale": "zh",
+  "appTitle": "提醒事项",
+  "todo": "提醒事项",
+  "settings": "设置",
+  "todoStatus": "{todoTitle}的状态是{status, select, 0{进行中} 1{完成} other{进行中}}",
+  "@todoStatus": {
+    "description": "todo完成状态",
+    "placeholders": {
+      "todoTitle": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "todoItems": "{count, plural, =0{没有提醒事项} =1{一个提醒事项} other{{count}个提醒事项}}",
+  "@todoItems": {
+    "description": "一个复数消息",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  }
 }

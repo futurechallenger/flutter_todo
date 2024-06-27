@@ -3,9 +3,8 @@
   "appTitle": "Todo",
   "todo": "Todo",
   "settings": "Settings",
-
-  "todoStatus": "{todoTitle} is {status}",
-  "@todoTitle": {
+  "todoStatus": "{todoTitle} is {status, select, 0{in progress} 1{completed} other{in progress}}",
+  "@todoStatus": {
     "description": "Todo status",
     "placeholders": {
       "todoTitle": {
@@ -13,8 +12,17 @@
         "example": "Leg day"
       },
       "status": {
-        "type": "String",
-        "example": "completed"
+        "type": "String"
+      }
+    }
+  },
+  "todoItems": "{count, plural, =0{no todo items} =1{1 todo item} other{{count} items}}",
+  "@todoItems": {
+    "description": "A plural message",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
       }
     }
   }
