@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "appTitle": "Todo",
   "todo": "Todo",
   "settings": "Settings",
