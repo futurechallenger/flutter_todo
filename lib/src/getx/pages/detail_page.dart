@@ -93,10 +93,11 @@ class DetailPage extends StatelessWidget {
                     height: 50.0,
                     color: Colors.lightBlueAccent,
                     child: Center(
-                        child: Text(AppLocalizations.of(context)!.todoStatus(
-                      _.rxTodoItem().content,
-                      '${_.rxTodoItem().status ?? 0}',
-                    )))),
+                        child: Obx(
+                            () => Text(AppLocalizations.of(context)!.todoStatus(
+                                  _.rxTodoItem().content,
+                                  '${_.rxTodoItem().status ?? 0}',
+                                ))))),
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
