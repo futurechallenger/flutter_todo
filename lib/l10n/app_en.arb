@@ -25,5 +25,6 @@
         "format": "compact"
       }
     }
-  }
+  },
+  "addToCalendar": "Add to calendar"
 }
