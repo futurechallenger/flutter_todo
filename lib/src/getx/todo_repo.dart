@@ -17,10 +17,10 @@ class TodoRepository {
     return api.deleteTodo(id);
   }
 
-  updateTodo(int todoId, String todoTitle,
-      [String? note, int? status, int? deleted]) async {
-    return api.updateTodo(todoId, todoTitle,
-        note: note, status: status, deleted: deleted);
+  updateTodo(int todoId,
+      {String? title, String? note, int? status, int? deleted}) async {
+    return api.updateTodo(todoId,
+        title: title, note: note, status: status, deleted: deleted);
   }
 
   addTodo(String title) async {

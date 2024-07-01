@@ -27,7 +27,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
   }
 
   void updateItem(String content) async {
-    await HttpRequest().updateTodo(widget.todoItem.id!, content);
+    await HttpRequest().updateTodo(widget.todoItem.id!, title: content);
   }
 
   @override

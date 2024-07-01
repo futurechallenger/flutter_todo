@@ -111,6 +111,16 @@ class DetailPage extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
+              Obx(() => LongPressDraggable<TodoItem>(
+                    data: _.rxTodoItem(),
+                    feedback: Container(
+                        color: Colors.white,
+                        child: const SizedBox(
+                            height: 90, child: Text("todo item"))),
+                    child: const Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+                        child: Center(child: Text("Status"))),
+                  )),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                 child: SizedBox(
@@ -119,10 +129,28 @@ class DetailPage extends StatelessWidget {
                     children: [
                       Expanded(
                           flex: 1,
-                          child: Container(
-                            color: Colors.green,
+                          child: DragTarget<TodoItem>(
+                            builder: (context, candidateItems, rejectedItems) {
+                              return Container(
+                                  color: Colors.green,
+                                  child: const Text("Completed"));
+                            },
+                            onAcceptWithDetails: (details) {
+                              debugPrint("Received details: $details");
+                              _.updateTodoStatus(1);
+                            },
                           )),
-                      const Expanded(flex: 1, child: Text("Hello, world!")),
+                      Expanded(
+                          flex: 1,
+                          child: DragTarget<TodoItem>(
+                            builder: (context, candidateItems, rejectedItems) {
+                              return const Text("In progress");
+                            },
+                            onAcceptWithDetails: (details) {
+                              debugPrint("Received details: $details");
+                              _.updateTodoStatus(0);
+                            },
+                          )),
                       IconButton(
                           onPressed: () async {
                             debugPrint("Delete icon button is clicked");

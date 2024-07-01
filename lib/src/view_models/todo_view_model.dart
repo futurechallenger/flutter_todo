@@ -13,7 +13,7 @@ class TodoViewModel extends ChangeNotifier {
 
   Future<void> updateTodo(int todoId, String content, [String? note]) async {
     try {
-      await HttpRequest().updateTodo(todoId, content);
+      await HttpRequest().updateTodo(todoId, title: content);
       _todoItem = TodoItem(
           id: todoId,
           content: content,
