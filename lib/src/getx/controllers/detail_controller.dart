@@ -4,7 +4,7 @@ import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:get/get.dart';
 
 class DetailController extends GetxController {
-  final rxTodoItem = const TodoItem(content: '').obs;
+  var rxTodoItem = const TodoItem(content: '').obs;
   set todoItem(value) {
     rxTodoItem(value);
   }
@@ -20,7 +20,7 @@ class DetailController extends GetxController {
   final TextEditingController noteEditingController = TextEditingController();
 
   Future<void> fetchTodoById(int todoId) async {
-    final TodoItem todo = await Get.find<TodoRepository>().getTodo(todoId);
+    TodoItem todo = await Get.find<TodoRepository>().getTodo(todoId);
 
     titleEditingController.text = todo.content;
     noteEditingController.text = todo.note ?? '';
@@ -33,10 +33,22 @@ class DetailController extends GetxController {
       throw Exception("Todo title is empty");
     }
 
-    await Get.find<TodoRepository>().updateTodo(
-        todoItem!.id!, rxTodoItem.value.content, rxTodoItem.value.note);
+    await Get.find<TodoRepository>().updateTodo(todoItem!.id!,
+        title: rxTodoItem.value.content, note: rxTodoItem.value.note);
 
     // update();
+  }
+
+  Future<void> updateTodoStatus(int status) async {
+    await Get.find<TodoRepository>().updateTodo(todoItem!.id!,
+        title: rxTodoItem.value.content, status: rxTodoItem.value.status ?? 0);
+
+    rxTodoItem(TodoItem(
+        content: rxTodoItem.value.content,
+        note: rxTodoItem.value.note,
+        status: status,
+        deleted: rxTodoItem.value.deleted,
+        id: rxTodoItem.value.id));
   }
 
   void resetTextController() {
