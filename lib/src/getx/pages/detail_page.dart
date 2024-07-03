@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/detail_controller.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
@@ -100,14 +102,33 @@ class DetailPage extends StatelessWidget {
                         ),
                       ),
                       child: Container(
-                          height: 50.0,
-                          color: Colors.lightBlueAccent,
-                          child: Center(
-                              child:
-                                  Text(AppLocalizations.of(context)!.todoStatus(
-                            _.rxTodoItem().content,
-                            '${_.rxTodoItem().status ?? 0}',
-                          )))),
+                        height: 50,
+                        color: Colors.lightBlueAccent,
+                        child: Stack(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Center(
+                                  child: Text(
+                                      AppLocalizations.of(context)!.todoStatus(
+                                _.rxTodoItem().content,
+                                '${_.rxTodoItem().status ?? 0}',
+                              ))),
+                            ),
+                            if (_.actionStatus.value == 'updating')
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(0, 0, 8, 0),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: SizedBox(
+                                      width: 30,
+                                      height: 30,
+                                      child: CircularProgressIndicator()),
+                                ),
+                              )
+                          ],
+                        ),
+                      ),
                     )),
               ),
               Padding(

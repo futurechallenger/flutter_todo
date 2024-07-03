@@ -4,7 +4,7 @@ import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:get/get.dart';
 
 class DetailController extends GetxController {
-  final actionStatus = "".obs;
+  final actionStatus = "".obs; // "updating", "done" or ""
 
   var rxTodoItem = const TodoItem(content: '').obs;
   set todoItem(value) {
@@ -42,6 +42,10 @@ class DetailController extends GetxController {
   }
 
   Future<void> updateTodoStatus(int status) async {
+    actionStatus.value = "updating";
+
+    await Future<void>.delayed(const Duration(seconds: 5));
+
     await Get.find<TodoRepository>().updateTodo(todoItem!.id!,
         title: rxTodoItem.value.content, status: rxTodoItem.value.status ?? 0);
 
@@ -51,6 +55,8 @@ class DetailController extends GetxController {
         status: status,
         deleted: rxTodoItem.value.deleted,
         id: rxTodoItem.value.id));
+
+    actionStatus.value = "done";
   }
 
   void resetTextController() {
