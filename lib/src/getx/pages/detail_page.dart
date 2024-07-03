@@ -89,15 +89,26 @@ class DetailPage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: Container(
-                    height: 50.0,
-                    color: Colors.lightBlueAccent,
-                    child: Center(
-                        child: Obx(
-                            () => Text(AppLocalizations.of(context)!.todoStatus(
-                                  _.rxTodoItem().content,
-                                  '${_.rxTodoItem().status ?? 0}',
-                                ))))),
+                child: Obx(() => LongPressDraggable(
+                      data: _.rxTodoItem(),
+                      feedback: FractionalTranslation(
+                        translation: const Offset(0.5, -0.5),
+                        child: Container(
+                          color: Colors.red,
+                          height: 50.0,
+                          child: const Text("Todo item"),
+                        ),
+                      ),
+                      child: Container(
+                          height: 50.0,
+                          color: Colors.lightBlueAccent,
+                          child: Center(
+                              child:
+                                  Text(AppLocalizations.of(context)!.todoStatus(
+                            _.rxTodoItem().content,
+                            '${_.rxTodoItem().status ?? 0}',
+                          )))),
+                    )),
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
@@ -111,46 +122,16 @@ class DetailPage extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              Obx(() => LongPressDraggable<TodoItem>(
-                    data: _.rxTodoItem(),
-                    feedback: Container(
-                        color: Colors.white,
-                        child: const SizedBox(
-                            height: 90, child: Text("todo item"))),
-                    child: const Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-                        child: Center(child: Text("Status"))),
-                  )),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
                 child: SizedBox(
                   height: 80,
                   child: Row(
                     children: [
                       Expanded(
-                          flex: 1,
-                          child: DragTarget<TodoItem>(
-                            builder: (context, candidateItems, rejectedItems) {
-                              return Container(
-                                  color: Colors.green,
-                                  child: const Text("Completed"));
-                            },
-                            onAcceptWithDetails: (details) {
-                              debugPrint("Received details: $details");
-                              _.updateTodoStatus(1);
-                            },
-                          )),
+                          flex: 1, child: _buildDragTarget(_, "Completed")),
                       Expanded(
-                          flex: 1,
-                          child: DragTarget<TodoItem>(
-                            builder: (context, candidateItems, rejectedItems) {
-                              return const Text("In progress");
-                            },
-                            onAcceptWithDetails: (details) {
-                              debugPrint("Received details: $details");
-                              _.updateTodoStatus(0);
-                            },
-                          )),
+                          flex: 1, child: _buildDragTarget(_, "In Progress")),
                       IconButton(
                           onPressed: () async {
                             debugPrint("Delete icon button is clicked");
@@ -170,5 +151,26 @@ class DetailPage extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  DragTarget<TodoItem> _buildDragTarget(DetailController _, String title) {
+    return DragTarget<TodoItem>(
+      builder: (context, candidateItems, rejectedItems) {
+        final highlighted = candidateItems.isNotEmpty;
+        return Transform.scale(
+          scale: highlighted ? 1.2 : 1,
+          child: Material(
+            elevation: highlighted ? 8 : 4,
+            color: highlighted ? const Color(0xFFF64209) : Colors.white,
+            child: SizedBox(
+                height: 80, width: 120, child: Center(child: Text(title))),
+          ),
+        );
+      },
+      onAcceptWithDetails: (details) {
+        debugPrint("Received details: $details");
+        _.updateTodoStatus(0);
+      },
+    );
   }
 }
