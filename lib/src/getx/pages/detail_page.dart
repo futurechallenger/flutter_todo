@@ -123,15 +123,14 @@ class DetailPage extends StatelessWidget {
                 flex: 1,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 22),
                 child: SizedBox(
                   height: 80,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                          flex: 1, child: _buildDragTarget(_, "Completed")),
-                      Expanded(
-                          flex: 1, child: _buildDragTarget(_, "In Progress")),
+                      _buildDragTarget(_, "Completed"),
+                      _buildDragTarget(_, "In Progress"),
                       IconButton(
                           onPressed: () async {
                             debugPrint("Delete icon button is clicked");
