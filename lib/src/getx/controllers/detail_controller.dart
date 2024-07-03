@@ -4,6 +4,8 @@ import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:get/get.dart';
 
 class DetailController extends GetxController {
+  final actionStatus = "".obs;
+
   var rxTodoItem = const TodoItem(content: '').obs;
   set todoItem(value) {
     rxTodoItem(value);

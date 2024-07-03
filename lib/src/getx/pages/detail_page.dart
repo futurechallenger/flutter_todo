@@ -129,8 +129,8 @@ class DetailPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildDragTarget(_, "Completed"),
-                      _buildDragTarget(_, "In Progress"),
+                      _buildDragTarget(_, "Completed", 1),
+                      _buildDragTarget(_, "In Progress", 0),
                       IconButton(
                           onPressed: () async {
                             debugPrint("Delete icon button is clicked");
@@ -152,7 +152,8 @@ class DetailPage extends StatelessWidget {
         ));
   }
 
-  DragTarget<TodoItem> _buildDragTarget(DetailController _, String title) {
+  DragTarget<TodoItem> _buildDragTarget(
+      DetailController _, String title, int status) {
     return DragTarget<TodoItem>(
       builder: (context, candidateItems, rejectedItems) {
         final highlighted = candidateItems.isNotEmpty;
@@ -168,7 +169,7 @@ class DetailPage extends StatelessWidget {
       },
       onAcceptWithDetails: (details) {
         debugPrint("Received details: $details");
-        _.updateTodoStatus(0);
+        _.updateTodoStatus(status);
       },
     );
   }
