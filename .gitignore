@@ -47,3 +47,5 @@ app.*.map.json
 /md/
 lib/**/*.freezed.dart
 lib/**/*.g.dart
+
+.env

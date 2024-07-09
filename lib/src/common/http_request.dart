@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HttpRequest {
-  final String hostUrl = 'http://192.168.31.182:17788';
+  final String hostUrl = dotenv.env['HOST_URL']!;
   var _client = http.Client();
 
   set client(c) => _client = c;
