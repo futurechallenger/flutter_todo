@@ -13,11 +13,13 @@ import 'package:provider/provider.dart';
 import 'package:calendar_plugin/calendar_plugin.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   final settingsController = SettingsController(SettingsService());
 
   await settingsController.loadSettings();

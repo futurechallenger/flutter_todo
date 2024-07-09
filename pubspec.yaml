@@ -25,6 +25,7 @@ dependencies:
       url: https://github.com/futurechallenger/calendar_plugin.git
       ref: main
   intl: any
+  flutter_dotenv: ^5.1.0
 
 
 dev_dependencies:
@@ -50,3 +51,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - .env
