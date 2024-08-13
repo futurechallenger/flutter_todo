@@ -66,7 +66,7 @@ class HomeController extends GetxController {
     final todoList = await Get.find<TodoRepository>()
         .getAllTodoList(completed: 'uncompleted');
 
-    this.todoList = todoList ?? [];
+    this.todoList = todoList ?? <TodoItem>[];
   }
 
   Future<void> addTodo({required String todo}) async {

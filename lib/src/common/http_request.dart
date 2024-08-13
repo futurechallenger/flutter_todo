@@ -15,7 +15,7 @@ class HttpRequest {
     bool all = false,
     String completed = 'completed',
   }) async {
-    final host = all == true ? "$hostUrl/list/all" : "$hostUrl/list/$completed";
+    final host = all == true ? "$hostUrl/todo" : "$hostUrl/todo/$completed";
     final response = await _client.get(Uri.parse(host));
 
     if (response.statusCode == 200) {
