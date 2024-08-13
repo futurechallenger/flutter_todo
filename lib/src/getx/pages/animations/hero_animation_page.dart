@@ -18,7 +18,7 @@ class _HeroAnimationPageState extends State<HeroAnimationPage>
     // TODO: only for test
     timeDilation = 3.0;
 
-    final content = widget.todoItem.content;
+    final content = widget.todoItem.title;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Details'),
