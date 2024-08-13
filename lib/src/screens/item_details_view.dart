@@ -46,7 +46,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
             child: Center(
               child: Consumer<TodoViewModel>(
                 builder: (context, model, child) {
-                  final todoTitle = model.getTodoItem()?.content ?? "";
+                  final todoTitle = model.getTodoItem()?.title ?? "";
                   return TextInputSwitchView(
                     content: todoTitle,
                     textStyle:

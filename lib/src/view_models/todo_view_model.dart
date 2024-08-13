@@ -16,8 +16,8 @@ class TodoViewModel extends ChangeNotifier {
       await HttpRequest().updateTodo(todoId, title: content);
       _todoItem = TodoItem(
           id: todoId,
-          content: content,
-          note: note ?? _todoItem!.note,
+          title: content,
+          desc: note ?? _todoItem!.desc,
           status: _todoItem!.status,
           deleted: _todoItem!.deleted);
       notifyListeners();

@@ -20,7 +20,7 @@ class HttpRequest {
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body['message'] != 'ok') {
+      if (body['message'] != 'OK') {
         return null;
       }
 
@@ -41,7 +41,7 @@ class HttpRequest {
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body['message'] == 'ok') {
+      if (body['message'] == 'OK') {
       } else {
         return null;
       }
@@ -54,15 +54,15 @@ class HttpRequest {
   }
 
   Future<TodoItem> addTodoItem(String todoTitle) async {
-    final response = await _client.post(Uri.parse("$hostUrl/add"),
+    final response = await _client.post(Uri.parse("$hostUrl/todo/create"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
-        body: json.encode({'content': todoTitle}));
+        body: json.encode({'title': todoTitle}));
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body['message'] == 'ok') {
+      if (body['message'] == 'OK') {
         return TodoItem.fromJson(body['data']);
       } else {
         throw Exception("Failed to add todo item");
@@ -90,7 +90,7 @@ class HttpRequest {
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body['message'] == 'ok') {
+      if (body['message'] == 'OK') {
         return;
       } else {
         throw Exception("Failed to add todo item");
