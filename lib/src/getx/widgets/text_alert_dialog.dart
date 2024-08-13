@@ -42,8 +42,8 @@ class TextAlertDialog extends StatelessWidget {
               if (controller.titleEditingController.text.isNotEmpty) {
                 controller.rxTodoItem(TodoItem(
                     id: controller.rxTodoItem.value.id,
-                    content: controller.titleEditingController.text,
-                    note: controller.rxTodoItem().note));
+                    title: controller.titleEditingController.text,
+                    desc: controller.rxTodoItem().desc));
 
                 controller.titleEditingController.text = '';
               }
@@ -51,8 +51,8 @@ class TextAlertDialog extends StatelessWidget {
               if (controller.noteEditingController.text.isNotEmpty) {
                 controller.rxTodoItem(TodoItem(
                     id: controller.rxTodoItem.value.id,
-                    content: controller.rxTodoItem().content,
-                    note: controller.noteEditingController.text));
+                    title: controller.rxTodoItem().title,
+                    desc: controller.noteEditingController.text));
 
                 controller.noteEditingController.text = '';
               }
@@ -71,7 +71,7 @@ class TextAlertDialog extends StatelessWidget {
         controller: controller.titleEditingController,
         decoration: InputDecoration(
           border: const OutlineInputBorder(),
-          hintText: controller.todoItem?.content ?? '',
+          hintText: controller.todoItem?.title ?? '',
         ),
       );
     }
@@ -80,7 +80,7 @@ class TextAlertDialog extends StatelessWidget {
       controller: controller.noteEditingController,
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
-        hintText: controller.todoItem?.note ?? '',
+        hintText: controller.todoItem?.desc ?? '',
       ),
     );
   }

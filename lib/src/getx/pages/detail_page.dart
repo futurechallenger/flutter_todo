@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/src/getx/controllers/detail_controller.dart';
 import 'package:flutter_todo/src/getx/controllers/home_controller.dart';
@@ -61,7 +59,7 @@ class DetailPage extends StatelessWidget {
                           _,
                         );
                       },
-                      child: Obx(() => Text(_.rxTodoItem().content))),
+                      child: Obx(() => Text(_.rxTodoItem().title))),
                 ),
               ),
               Padding(
@@ -74,7 +72,7 @@ class DetailPage extends StatelessWidget {
                         showTextAlertDialog(context, _, isTitle: false);
                       },
                       child: Obx(
-                          () => Text(_.rxTodoItem().note ?? 'No note added'))),
+                          () => Text(_.rxTodoItem().desc ?? 'No note added'))),
                 ),
               ),
               Padding(
@@ -111,7 +109,7 @@ class DetailPage extends StatelessWidget {
                               child: Center(
                                   child: Text(
                                       AppLocalizations.of(context)!.todoStatus(
-                                _.rxTodoItem().content,
+                                _.rxTodoItem().title,
                                 '${_.rxTodoItem().status ?? 0}',
                               ))),
                             ),

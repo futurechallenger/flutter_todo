@@ -37,7 +37,7 @@ class _ItemListViewState extends State<ItemListView> {
                 final item = snapshot.data![index];
 
                 return ListTile(
-                    title: Text(item.content),
+                    title: Text(item.title),
                     leading: const Icon(Icons.circle_outlined),
                     onTap: () {
                       // Navigator.restorablePushNamed(

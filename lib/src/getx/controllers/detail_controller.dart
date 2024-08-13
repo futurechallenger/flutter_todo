@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class DetailController extends GetxController {
   final actionStatus = "".obs; // "updating", "done" or ""
 
-  var rxTodoItem = const TodoItem(content: '').obs;
+  var rxTodoItem = const TodoItem(title: '').obs;
   set todoItem(value) {
     rxTodoItem(value);
   }
@@ -24,8 +24,8 @@ class DetailController extends GetxController {
   Future<void> fetchTodoById(int todoId) async {
     TodoItem todo = await Get.find<TodoRepository>().getTodo(todoId);
 
-    titleEditingController.text = todo.content;
-    noteEditingController.text = todo.note ?? '';
+    titleEditingController.text = todo.title;
+    noteEditingController.text = todo.desc ?? '';
 
     rxTodoItem(todo);
   }
@@ -36,7 +36,7 @@ class DetailController extends GetxController {
     }
 
     await Get.find<TodoRepository>().updateTodo(todoItem!.id!,
-        title: rxTodoItem.value.content, note: rxTodoItem.value.note);
+        title: rxTodoItem.value.title, note: rxTodoItem.value.desc);
 
     // update();
   }
@@ -47,11 +47,11 @@ class DetailController extends GetxController {
     await Future<void>.delayed(const Duration(seconds: 5));
 
     await Get.find<TodoRepository>().updateTodo(todoItem!.id!,
-        title: rxTodoItem.value.content, status: rxTodoItem.value.status ?? 0);
+        title: rxTodoItem.value.title, status: rxTodoItem.value.status ?? 0);
 
     rxTodoItem(TodoItem(
-        content: rxTodoItem.value.content,
-        note: rxTodoItem.value.note,
+        title: rxTodoItem.value.title,
+        desc: rxTodoItem.value.desc,
         status: status,
         deleted: rxTodoItem.value.deleted,
         id: rxTodoItem.value.id));
@@ -60,8 +60,8 @@ class DetailController extends GetxController {
   }
 
   void resetTextController() {
-    titleEditingController.text = rxTodoItem.value.content;
-    noteEditingController.text = rxTodoItem.value.note ?? '';
+    titleEditingController.text = rxTodoItem.value.title;
+    noteEditingController.text = rxTodoItem.value.desc ?? '';
   }
 
   @override
