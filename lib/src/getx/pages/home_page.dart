@@ -47,11 +47,11 @@ class HomePage extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         final item = controller.todoList[index];
                         return Hero(
-                          tag: item.content,
+                          tag: item.title,
                           child: Material(
                             type: MaterialType.transparency,
                             child: ListRow(
-                                content: item.content,
+                                content: item.title,
                                 navigateTo: () async {
                                   final result = await Navigator.of(context)
                                       .push(MaterialPageRoute(
