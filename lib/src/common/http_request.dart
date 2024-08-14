@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter_todo/src/common/logger_provider.dart';
 import 'package:flutter_todo/src/models/todo_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HttpRequest {
+  final logger = getLogger();
+
   final String hostUrl = dotenv.env['HOST_URL']!;
   var _client = http.Client();
 
@@ -15,10 +18,17 @@ class HttpRequest {
     bool all = false,
     String completed = 'completed',
   }) async {
-    final host = all == true ? "$hostUrl/todo" : "$hostUrl/todo/$completed";
-    final response = await _client.get(Uri.parse(host));
+    try {
+      final host = all == true ? "$hostUrl/todo" : "$hostUrl/todo/$completed";
 
-    if (response.statusCode == 200) {
+      logger.i("get todo list with host: $host");
+
+      final response = await _client.get(Uri.parse(host));
+
+      if (response.statusCode < 200 || response.statusCode > 300) {
+        return null;
+      }
+
       final body = jsonDecode(response.body) as Map<String, dynamic>;
       if (body['message'] != 'OK') {
         return null;
@@ -31,15 +41,22 @@ class HttpRequest {
       }
 
       return todoItemList;
-    } else {
+    } catch (e) {
+      logger.e("Error fetching todo list", error: e);
       return null;
     }
   }
 
   Future<TodoItem?> fetchTodoById(int todoId) async {
-    final response = await _client.get(Uri.parse('$hostUrl/todo/$todoId'));
+    try {
+      logger.i("fetching todo with id $todoId");
 
-    if (response.statusCode == 200) {
+      final response = await _client.get(Uri.parse('$hostUrl/todo/$todoId'));
+
+      if (response.statusCode < 200 || response.statusCode > 300) {
+        return null;
+      }
+
       final body = jsonDecode(response.body) as Map<String, dynamic>;
       if (body['message'] == 'OK') {
       } else {
@@ -47,8 +64,10 @@ class HttpRequest {
       }
 
       final data = body['data'] as Map<String, dynamic>;
+
       return TodoItem.fromJson(data);
-    } else {
+    } catch (e) {
+      logger.e("Error fetching a todo item", error: e);
       return null;
     }
   }
@@ -74,44 +93,59 @@ class HttpRequest {
 
   Future<void> updateTodo(int id,
       {String? title, String? note, int? status, int? deleted}) async {
-    final response = await _client.post(Uri.parse("$hostUrl/update"),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: json.encode({
-          'todo': {
-            'id': id,
-            'content': title,
-            'note': note,
-            'status': status,
-            'deleted': deleted
-          }
-        }));
+    try {
+      logger.i(
+          "Updating todo $id, with title: $title, note: $note, deleted: $deleted");
 
-    if (response.statusCode == 200) {
+      final response = await _client.post(Uri.parse("$hostUrl/update"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          },
+          body: json.encode({
+            'todo': {
+              'id': id,
+              'content': title,
+              'note': note,
+              'status': status,
+              'deleted': deleted
+            }
+          }));
+
+      if (!isHttpStatusOK(response.statusCode)) {
+        return;
+      }
+
       final body = jsonDecode(response.body) as Map<String, dynamic>;
       if (body['message'] == 'OK') {
         return;
       } else {
         throw Exception("Failed to add todo item");
       }
-    } else {
-      throw Exception("Failed to add todo item");
+    } catch (e) {
+      logger.e('update todo item error', error: e);
+      rethrow;
     }
   }
 
   Future<void> deleteTodo(int id) async {
-    final response = await _client.delete(
-      Uri.parse("$hostUrl/delete/$id"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8'
-      },
-    );
+    try {
+      final response = await _client.delete(
+        Uri.parse("$hostUrl/delete/$id"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
 
-    if (response.statusCode == 200) {
-      return;
-    } else {
+      if (isHttpStatusOK(response.statusCode)) return;
+
       throw Exception("Failed to delete todo with id: {$id}");
+    } catch (e) {
+      logger.e("Error deleting a todo item", error: e);
+      rethrow;
     }
+  }
+
+  bool isHttpStatusOK(int statusCode) {
+    return statusCode >= 200 || statusCode < 300;
   }
 }
