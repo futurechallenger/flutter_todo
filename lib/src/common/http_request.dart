@@ -73,21 +73,28 @@ class HttpRequest {
   }
 
   Future<TodoItem> addTodoItem(String todoTitle) async {
-    final response = await _client.post(Uri.parse("$hostUrl/todo/create"),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: json.encode({'title': todoTitle}));
+    try {
+      logger.i("Creating an todo item with title: $todoTitle");
 
-    if (response.statusCode == 200) {
-      final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body['message'] == 'OK') {
-        return TodoItem.fromJson(body['data']);
+      final response = await _client.post(Uri.parse("$hostUrl/todo/create"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          },
+          body: json.encode({'title': todoTitle}));
+
+      if (isHttpStatusOK(response.statusCode)) {
+        final body = jsonDecode(response.body) as Map<String, dynamic>;
+        if (body['message'] == 'OK') {
+          return TodoItem.fromJson(body['data']);
+        } else {
+          throw Exception(body['message']);
+        }
       } else {
         throw Exception("Failed to add todo item");
       }
-    } else {
-      throw Exception("Failed to add todo item");
+    } catch (e) {
+      logger.e("Error creating todo item", error: e);
+      rethrow;
     }
   }
 
@@ -129,6 +136,8 @@ class HttpRequest {
 
   Future<void> deleteTodo(int id) async {
     try {
+      logger.i("deleting todo item $id");
+
       final response = await _client.delete(
         Uri.parse("$hostUrl/delete/$id"),
         headers: <String, String>{
