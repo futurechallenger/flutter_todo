@@ -51,7 +51,8 @@ class HttpRequest {
     try {
       logger.i("fetching todo with id $todoId");
 
-      final response = await _client.get(Uri.parse('$hostUrl/todo/$todoId'));
+      final response =
+          await _client.get(Uri.parse('$hostUrl/todo/item$todoId'));
 
       if (response.statusCode < 200 || response.statusCode > 300) {
         return null;
