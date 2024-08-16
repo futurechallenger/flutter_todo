@@ -16,6 +16,8 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		C2BA17570AFA6FB97154383F /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFD5DC89F77B9EE7D71159D /* Pods_RunnerTests.framework */; };
+		EF1492042C6F633A0060CE9F /* FLNariveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1492032C6F633A0060CE9F /* FLNariveView.swift */; };
+		EF1492062C6F65BF0060CE9F /* FLNativeViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1492052C6F65BF0060CE9F /* FLNativeViewFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B770FE731FF05F9CB0F6F67D /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		D1BCC28061DF3858224006F4 /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EF1492032C6F633A0060CE9F /* FLNariveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLNariveView.swift; sourceTree = "<group>"; };
+		EF1492052C6F65BF0060CE9F /* FLNativeViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLNativeViewFactory.swift; sourceTree = "<group>"; };
 		F88D4ED331D699EC45077D26 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +142,8 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				EF1492032C6F633A0060CE9F /* FLNariveView.swift */,
+				EF1492052C6F65BF0060CE9F /* FLNativeViewFactory.swift */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -376,6 +382,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF1492062C6F65BF0060CE9F /* FLNativeViewFactory.swift in Sources */,
+				EF1492042C6F633A0060CE9F /* FLNariveView.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
