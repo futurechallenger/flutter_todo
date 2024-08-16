@@ -9,6 +9,7 @@ import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 
 import 'animations/tween_animation_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'native_view_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -110,6 +111,16 @@ class SettingsPage extends StatelessWidget {
                   _showActionSheet(context);
                 },
                 title: const Text("Animation"),
+              ),
+              const Divider(),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NativeViewPage()));
+                },
+                title: const Text("Native View"),
               ),
             ],
           )),
