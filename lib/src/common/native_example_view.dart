@@ -1,10 +1,40 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 class NativeExampleView extends StatelessWidget {
   const NativeExampleView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Native view here");
+    const String viewType = '@views/native_example_view';
+    const Map<String, dynamic> creationParams = <String, dynamic>{};
+
+    return PlatformViewLink(
+      viewType: viewType,
+      surfaceFactory: (context, controller) {
+        return AndroidViewSurface(
+            controller: controller as AndroidViewController,
+            hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+            gestureRecognizers: const <Factory<
+                OneSequenceGestureRecognizer>>{});
+      },
+      onCreatePlatformView: (params) {
+        return PlatformViewsService.initSurfaceAndroidView(
+          id: params.id,
+          viewType: viewType,
+          layoutDirection: TextDirection.ltr,
+          creationParams: creationParams,
+          creationParamsCodec: const StandardMessageCodec(),
+          onFocus: () {
+            params.onFocusChanged(true);
+          },
+        )
+          ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+          ..create();
+      },
+    );
   }
 }
