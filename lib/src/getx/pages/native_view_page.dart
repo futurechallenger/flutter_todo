@@ -6,6 +6,14 @@ class NativeViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const NativeExampleView();
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("Hybrid Composition"),
+        ),
+        body: Center(
+            child: Container(
+                color: Colors.amber,
+                child:
+                    const SizedBox(width: 300, child: NativeExampleView()))));
   }
 }
