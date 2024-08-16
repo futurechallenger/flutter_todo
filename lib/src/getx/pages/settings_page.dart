@@ -4,6 +4,7 @@ import 'package:flutter_todo/src/getx/pages/animations/implicit_animation_page.d
 import 'package:flutter_todo/src/getx/pages/animations/physics_animation_page.dart';
 import 'package:flutter_todo/src/getx/pages/responsive_page.dart';
 import 'package:flutter_todo/src/getx/pages/stream_page.dart';
+import 'package:flutter_todo/src/getx/texture_layer_native_page.dart';
 import 'package:get/get.dart';
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 
@@ -121,6 +122,17 @@ class SettingsPage extends StatelessWidget {
                           builder: (context) => const NativeViewPage()));
                 },
                 title: const Text("Native View"),
+              ),
+              const Divider(),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const TextureLayerNativePage()));
+                },
+                title: const Text("Texture Layer Native View"),
               ),
             ],
           )),
