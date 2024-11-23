@@ -7,7 +7,7 @@ part 'todo_model.g.dart';
 class TodoItem with _$TodoItem {
   const factory TodoItem({
     int? id,
-    required String title,
+    required String content,
     String? desc,
     int? deleted,
     int? status,

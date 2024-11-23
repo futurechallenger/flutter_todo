@@ -8,7 +8,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class HttpRequest {
   final logger = getLogger();
 
-  final String hostUrl = dotenv.env['HOST_URL']!;
+  // final String hostUrl = dotenv.env['HOST_URL']!;
+  final String hostUrl = 'http://localhost:17788';
+
   var _client = http.Client();
 
   set client(c) => _client = c;
@@ -19,7 +21,8 @@ class HttpRequest {
     String completed = 'completed',
   }) async {
     try {
-      final host = all == true ? "$hostUrl/todo" : "$hostUrl/todo/$completed";
+      final host =
+          all == true ? "$hostUrl/list/all" : "$hostUrl/todo/$completed";
 
       logger.i("get todo list with host: $host");
 
@@ -30,7 +33,7 @@ class HttpRequest {
       }
 
       final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body['message'] != 'OK') {
+      if (body['message'] != 'ok') {
         return null;
       }
 
@@ -81,7 +84,7 @@ class HttpRequest {
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8'
           },
-          body: json.encode({'title': todoTitle}));
+          body: json.encode({'content': todoTitle}));
 
       if (isHttpStatusOK(response.statusCode)) {
         final body = jsonDecode(response.body) as Map<String, dynamic>;
