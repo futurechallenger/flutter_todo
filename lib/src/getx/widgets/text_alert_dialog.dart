@@ -51,7 +51,7 @@ class TextAlertDialog extends StatelessWidget {
               if (controller.noteEditingController.text.isNotEmpty) {
                 controller.rxTodoItem(TodoItem(
                     id: controller.rxTodoItem.value.id,
-                    content: controller.rxTodoItem().title,
+                    content: controller.rxTodoItem().content,
                     desc: controller.noteEditingController.text));
 
                 controller.noteEditingController.text = '';
@@ -71,7 +71,7 @@ class TextAlertDialog extends StatelessWidget {
         controller: controller.titleEditingController,
         decoration: InputDecoration(
           border: const OutlineInputBorder(),
-          hintText: controller.todoItem?.title ?? '',
+          hintText: controller.todoItem?.content ?? '',
         ),
       );
     }
