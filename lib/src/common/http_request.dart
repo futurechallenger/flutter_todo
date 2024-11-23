@@ -54,15 +54,14 @@ class HttpRequest {
     try {
       logger.i("fetching todo with id $todoId");
 
-      final response =
-          await _client.get(Uri.parse('$hostUrl/todo/item$todoId'));
+      final response = await _client.get(Uri.parse('$hostUrl/todo/$todoId'));
 
       if (response.statusCode < 200 || response.statusCode > 300) {
         return null;
       }
 
       final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body['message'] == 'OK') {
+      if (body['message'] == 'ok') {
       } else {
         return null;
       }
