@@ -59,7 +59,7 @@ class DetailPage extends StatelessWidget {
                           _,
                         );
                       },
-                      child: Obx(() => Text(_.rxTodoItem().title))),
+                      child: Obx(() => Text(_.rxTodoItem().content))),
                 ),
               ),
               Padding(
@@ -109,7 +109,7 @@ class DetailPage extends StatelessWidget {
                               child: Center(
                                   child: Text(
                                       AppLocalizations.of(context)!.todoStatus(
-                                _.rxTodoItem().title,
+                                _.rxTodoItem().content,
                                 '${_.rxTodoItem().status ?? 0}',
                               ))),
                             ),
