@@ -3,3 +3,8 @@ name: some_project
 packages:
   - apps/**
   - services/**
+
+scripts:
+  analyze:
+    run: melos exec -- "flutter analyze"
+    description: Analyze all packages
