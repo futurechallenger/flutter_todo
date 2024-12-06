@@ -8,3 +8,9 @@ scripts:
   analyze:
     run: melos exec -- "flutter analyze"
     description: Analyze all packages
+
+  # build:
+  #   run: melos bootstrap && melos run build
+
+  start-todo:
+    run:flutter
