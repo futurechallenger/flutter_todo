@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:todo/src/models/todo_model.dart';
 
 class HttpRequest {
-  final String hostUrl = 'http://192.168.31.182:17788';
+  final String hostUrl = 'http://192.168.31.74:17788';
   var _client = http.Client();
 
   set client(c) => _client = c;
