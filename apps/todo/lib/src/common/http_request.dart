@@ -15,7 +15,8 @@ class HttpRequest {
     String completed = 'completed',
   }) async {
     final host = all == true ? "$hostUrl/list/all" : "$hostUrl/list/$completed";
-    final response = await _client.get(Uri.parse(host));
+    final response = await _client
+        .get(Uri.parse(host), headers: {'Content-Type': 'application/json'});
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;

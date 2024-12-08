@@ -51,3 +51,4 @@ app_models.dart
 
 node_modules/
 melos_some_project.iml
+**/*.mocks.dart
