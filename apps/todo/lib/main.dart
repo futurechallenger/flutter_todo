@@ -4,15 +4,13 @@ import 'package:get/route_manager.dart';
 import 'package:todo/src/controllers/home_controller.dart';
 import 'package:todo/src/pages/home_page.dart';
 import 'package:todo/src/todo_repo.dart';
+import 'package:utils/utils.dart';
 
 void main() async {
-  // final settingsController = SettingsController(SettingsService());
+  final calculator = Calculator();
+  final calRet = calculator.addOne(1);
+  debugPrint('Cal ret:> $calRet');
 
-  // await settingsController.loadSettings();
-
-  // runApp(MultiProvider(
-  //     providers: [ChangeNotifierProvider(create: (context) => TodoViewModel())],
-  //     child: MyApp(settingsController: settingsController)));
   runApp(const GetxApplication());
 }
 

@@ -2,7 +2,7 @@ name: some_project
 
 packages:
   - apps/**
-  - services/**
+  - packages/**
 
 scripts:
   analyze:
